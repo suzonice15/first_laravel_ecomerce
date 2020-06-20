@@ -108,8 +108,27 @@ class CheckOutController extends Controller
 
             //  return view('website.category_ajax', compact('products'));
             $view = view('website.cart_ajax')->render();
+            $items = \Cart::getContent();
+            //Cart::clear();
+            $total=0;
+            $quantity=0;
+            foreach($items as $row) {
 
-            return response()->json(['html'=>$view]);
+                $total = \Cart::getTotal();
+                $quantity +=$row->quantity;
+
+            }
+            $quantity= Cart::getContent()->count();
+//        $data['total']=$total;
+//        $data['count']=$quantity;
+            $data1=[
+                'total'=>$total,
+                'count'=>$quantity,
+            ];
+
+           // return response()->json(['result'=>$data1]);
+
+            return response()->json(['html'=>$view,'result'=>$data1]);
         }
 
     }
@@ -126,7 +145,27 @@ class CheckOutController extends Controller
             //  return view('website.category_ajax', compact('products'));
             $view = view('website.cart_ajax')->render();
 
-            return response()->json(['html'=>$view]);
+            $items = \Cart::getContent();
+            //Cart::clear();
+            $total=0;
+            $quantity=0;
+            foreach($items as $row) {
+
+                $total = \Cart::getTotal();
+                $quantity +=$row->quantity;
+
+            }
+            $quantity= Cart::getContent()->count();
+//        $data['total']=$total;
+//        $data['count']=$quantity;
+            $data1=[
+                'total'=>$total,
+                'count'=>$quantity,
+            ];
+
+            // return response()->json(['result'=>$data1]);
+
+            return response()->json(['html'=>$view,'result'=>$data1]);
         }
 
     }
@@ -139,10 +178,98 @@ class CheckOutController extends Controller
             //  return view('website.category_ajax', compact('products'));
             $view = view('website.cart_ajax')->render();
 
-            return response()->json(['html'=>$view]);
+            $items = \Cart::getContent();
+            //Cart::clear();
+            $total=0;
+            $quantity=0;
+            foreach($items as $row) {
+
+                $total = \Cart::getTotal();
+                $quantity +=$row->quantity;
+
+            }
+            $quantity= Cart::getContent()->count();
+//        $data['total']=$total;
+//        $data['count']=$quantity;
+            $data1=[
+                'total'=>$total,
+                'count'=>$quantity,
+            ];
+
+            // return response()->json(['result'=>$data1]);
+
+            return response()->json(['html'=>$view,'result'=>$data1]);
         }
 
     }
+    public function add_to_wishlist(Request $request)
+    {
+       // $request->session()->put('my_name','Virat Gandhi');
+        $wishlist = array();
+        $product_id=$request->product_id;
+        if($request->session()->has('wishlist')){
+           // $wishlist = $this->session->userdata('wishlist');
+            $wishlist=$request->session()->get('wishlist');
+
+        }
+        array_push($wishlist, $product_id);
+
+        $wishlist = array_unique($wishlist);
+
+        $request->session()->put('wishlist', $wishlist);
+
+
+
+
+    }
+
+    public  function wishlist(Request $request){
+
+        $wishlist=$request->session()->get('wishlist');
+
+        if($request->session()->has('wishlist'))
+        {
+            $wishlist=$request->session()->get('wishlist');
+            $data['products']=DB::table('product')->whereIn('product_id',$wishlist)->get();
+
+        }
+
+
+
+        return view('website.wishlist',$data);
+
+
+    }
+    public function remove_wish_list(Request $request)
+    {
+        $wishlist = array();
+
+        $product_id=$request->product_id;
+        if($request->session()->has('wishlist')){
+            // $wishlist = $this->session->userdata('wishlist');
+            $wishlist=$request->session()->get('wishlist');
+
+        }
+
+            $key = array_search($product_id, $wishlist);
+
+            unset($wishlist[$key]);
+
+            $wishlist = array_values($wishlist);
+
+            ///  $this->session->set_userdata('wishlist', $wishlist);
+            $request->session()->put('wishlist', $wishlist);
+
+
+        $products=DB::table('product')->whereIn('product_id',$wishlist)->get();
+
+        $view = view('website.wishlist_ajax',compact('products'))->render();
+
+        return response()->json(['html'=>$view]);
+
+
+    }
+
 
     /**
      * Store a newly created resource in storage.

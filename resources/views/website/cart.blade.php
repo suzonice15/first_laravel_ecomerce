@@ -5,8 +5,9 @@
     <div class="container-fluid" id="cart">
 
         <div class="row order_tank_you_class">
-            <?php
 
+
+        <?php
 
 
             if ( !Cart::isEmpty()){ ?>
@@ -171,7 +172,8 @@
                 .done(function(data)
 
                 {
-                      console.log(data)
+                    $('body .count').text(data.result.count);
+                    $('body .value').text(data.result.total);
 
                     jQuery("#cart").html(data.html);
 
@@ -208,7 +210,8 @@
                 .done(function(data)
 
                 {
-                    console.log(data)
+                    $('body .count').text(data.result.count);
+                    $('body .value').text(data.result.total);
 
                     jQuery("#cart").html(data.html);
 
@@ -243,7 +246,9 @@
                 .done(function(data)
 
                 {
-                    console.log(data)
+
+                    $('body .count').text(data.result.count);
+                    $('body .value').text(data.result.total);
 
                     jQuery("#cart").html(data.html);
 

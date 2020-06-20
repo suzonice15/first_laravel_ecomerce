@@ -63,8 +63,7 @@
                                     </button>
                                 </li>
                                 <li class="lnk wishlist">
-                                    <a class="add-to-cart" href="detail.html"
-                                       title="Wishlist">
+                                    <a class="add-to-wishlist" data-product_id="{{ $product->product_id}}" href="javascript:void(0)" title="Wishlist">
                                         <i class="icon fa fa-heart"></i>
                                     </a>
                                 </li>

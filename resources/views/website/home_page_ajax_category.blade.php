@@ -77,12 +77,16 @@ $products= DB::table('product')->join('product_category_relation','product.produ
                                 </li>
                                 <li></li>
                                 <li class="lnk wishlist">
-                                    <a class="add-to-cart" href="detail.html" title="Wishlist">
+                                    <a class="add-to-wishlist" data-product_id="{{ $product->product_id}}" href="javascript:void(0)" title="Wishlist">
                                         <i class="icon fa fa-heart"></i>
                                     </a>
                                 </li>
                                 <li class="lnk">
-                                    <a class="add-to-cart" href="{{ url('product') }}/{{$product->product_name}}" title="Compare">
+                                    <a class="buy-now-cart"
+
+                                       data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/thumb/{{ $product->feasured_image}}"
+
+                                       href="javascript:void(0)" title="Compare">
                                         <i class="fa fa-signal" aria-hidden="true"></i>
                                     </a>
                                 </li>

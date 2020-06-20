@@ -124,9 +124,8 @@
 <script src="{{ asset('assets/font_end/')}}/js/bootstrap-select.min.js"></script>
 <script src="{{ asset('assets/font_end/')}}/js/wow.min.js"></script>
 <script src="{{ asset('assets/font_end/')}}/js/scripts.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
 <script>
-    $("#zoom_04").ezPlus();
+ //   $("#zoom_04").ezPlus();
     $('.main_parent_category').on('click',function () {
         let href= this.href;
        window.open(href,'_self')
@@ -134,6 +133,24 @@
     </script>
 
 
+
+<script>
+    $(document).on('click','.add-to-wishlist',function () {
+        let product_id=  $(this).data("product_id"); // will return the number 123
+        $(this).css("background-color", "red");
+
+        $.ajax({
+            type:"GET",
+            url:"{{url('add-to-wishlist')}}?product_id="+product_id,
+            success:function(data)
+            {
+
+
+            }
+        })
+
+    })
+</script>
 <script>
     $(document).on('click','.add_to_cart',function () {
         let product_id=  $(this).data("product_id"); // will return the number 123
@@ -147,6 +164,23 @@
 
                  $('body .count').text(data.result.count);
                  $('body .value').text(data.result.total);
+            }
+        })
+
+    })
+</script>
+<script>
+    $(document).on('click','.buy-now-cart',function () {
+        let product_id=  $(this).data("product_id"); // will return the number 123
+        let picture=  $(this).data("picture"); // will return the number 123
+         $.ajax({
+            type:"GET",
+            url:"{{url('add-to-cart')}}?product_id="+product_id+"&picture="+picture,
+            success:function(data)
+            {
+                 window.location.assign("{{ url('/') }}/checkout")
+                $('body .count').text(data.result.count);
+                $('body .value').text(data.result.total);
             }
         })
 

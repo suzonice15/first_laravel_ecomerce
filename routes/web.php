@@ -24,6 +24,9 @@ Route::get('/cart', 'CheckOutController@cart');
 Route::get('/plus_cart_item', 'CheckOutController@plus_cart_item');
 Route::get('/minus_cart_item', 'CheckOutController@minus_cart_item');
 Route::get('/remove_cart_item', 'CheckOutController@remove_cart_item');
+Route::get('/add-to-wishlist', 'CheckOutController@add_to_wishlist');
+Route::get('/wishlist', 'CheckOutController@wishlist');
+Route::get('/remove-to-wishlist', 'CheckOutController@remove_wish_list');
 Route::get('/checkout', 'CheckOutController@checkout');
 Route::post('/chechout', 'CheckOutController@checkoutStore');
 

@@ -56,10 +56,8 @@ class AjaxController extends Controller
 
         return response()->json(['result'=>$data1]);
 
-       //echo json_encode($data);
 
 
-        //
     }
 
     public  function index()
