@@ -36,6 +36,7 @@
                     </div>
                 </div>
                 <!-- INFO BOXES  -->
+
                 <div class="info-boxes wow fadeInUp">
                     <div class="info-boxes-inner">
                         <div class="row">
@@ -43,10 +44,10 @@
                                 <div class="info-box">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4 class="info-box-heading green">money back</h4>
+                                            <h4 class="info-box-heading green">Delivery </h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">30 Days Money Back Guarantee</h6>
+                                    <h6 class="text">One  Day Inside Dhaka</h6>
                                 </div>
                             </div>
                             <div class="hidden-md col-sm-4 col-lg-4">
@@ -56,7 +57,7 @@
                                             <h4 class="info-box-heading green">free shipping</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">Shipping on orders over $99</h6>
+                                    <h6 class="text">Shipping on orders over 2,000</h6>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-4 col-lg-4">
@@ -121,8 +122,10 @@
 
                 var owl = $(this);
                 var  itemPerLine = owl.data('item');
+
                 if(!itemPerLine){
-                    itemPerLine = 4;
+                    itemPerLine = 6;
+
                 }
                 owl.owlCarousel({
                     items : itemPerLine,
@@ -171,7 +174,7 @@
 
                 jQuery("#hot_ajax_product").html(data.html);
                 jQuery(".best-seller").owlCarousel({
-                    items : 3,
+                    items : 4,
                     navigation : true,
                     itemsDesktopSmall :[979,2],
                     itemsDesktop : [1199,2],

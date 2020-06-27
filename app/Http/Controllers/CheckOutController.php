@@ -232,6 +232,9 @@ class CheckOutController extends Controller
             $wishlist=$request->session()->get('wishlist');
             $data['products']=DB::table('product')->whereIn('product_id',$wishlist)->get();
 
+        } else {
+            $data['products']='';
+
         }
 
 

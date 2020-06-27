@@ -16,9 +16,16 @@ Route::get('/', 'HomeController@index');
 Route::get('/category/{id}', 'HomeController@category');
 Route::get('ajax_category', 'HomeController@ajax_category');
 Route::get('/product/{id}', 'HomeController@product');
+Route::get('/search_engine', 'HomeController@search_engine');
+Route::get('/search', 'HomeController@search');
 Route::get('/hot_home_product', 'HomeController@hot_home_product');
 Route::get('/home_page_category_ajax', 'HomeController@home_page_category_ajax');
 Route::get('/add-to-cart', 'AjaxController@add_to_cart');
+Route::get('/related/product', 'AjaxController@relatedProduct');
+Route::get('/hotdeal/product', 'AjaxController@hotdealProduct');
+
+
+/*            cart           */
 Route::get('/thank-you', 'CheckOutController@thankYou');
 Route::get('/cart', 'CheckOutController@cart');
 Route::get('/plus_cart_item', 'CheckOutController@plus_cart_item');
@@ -105,5 +112,9 @@ Route::post('admin/slider/store', 'admin\SliderController@store');
 Route::post('admin/slider/update/{id}', 'admin\SliderController@update');
 Route::get('admin/slider/{id}', 'admin\SliderController@edit');
 Route::get('/admin/slider/delete/{id}', 'admin\SliderController@destroy');
+Route::get('/view-clear', function() {
+    $exitCode = Artisan::call('view:clear');
+    return '<h1>View cache cleared</h1>';
+});
 
 

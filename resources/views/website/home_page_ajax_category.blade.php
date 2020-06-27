@@ -4,8 +4,8 @@ if($categories){
 foreach ($categories as  $category) {
     $category_id=$category->category_id;
 
-$products= DB::table('product')->join('product_category_relation','product.product_id','=','product_category_relation.product_id')
-        ->join('category','category.category_id','=','product_category_relation.category_id')->where('category.category_id',$category_id)->get();
+$products= DB::table('product')->select('product.product_id','product_title','product_name','discount_price','product_price','folder','feasured_image','sku')->join('product_category_relation','product.product_id','=','product_category_relation.product_id')
+       ->where('product_category_relation.category_id',$category_id)->paginate(15);
 ?>
 <section class="section featured-product wow fadeInUp">
     <h3 class="section-title"><a href="{{ url('/') }}/category/{{ $category->category_name }}">{{ $category->category_title }}</a></h3>
@@ -40,19 +40,21 @@ $products= DB::table('product')->join('product_category_relation','product.produ
                     <div class="product-info text-left">
                         <h3 class="name"><a
                                 href="{{ url('product') }}/{{$product->product_name}}">{{$product->product_title}}</a>
-                        </h3>                        <div class="rating rateit-small"></div>
+                        </h3>
+
+                        <h3 class="name">Product Code : {{$product->sku}}</h3>
 
 
                         <div class="product-price">
                                 <span class="price">
-                              {{$sell_price}} 				</span>
+                              @money($sell_price)  				</span>
                             <?php
                             if($product->discount_price){
 
 
                             ?>
                             <span class="price-before-discount"
-                                  style="color:red">$ {{$product->product_price}}</span>
+                                  style="color:red">   @money($product->product_price)</span>
 
                             <?php
 
@@ -62,37 +64,31 @@ $products= DB::table('product')->join('product_category_relation','product.produ
                         </div>
                     </div>
                     <div class="cart clearfix animate-effect">
-
                         <div class="action">
                             <ul class="list-unstyled">
+
+                                <li class="add-cart-button">
+                                    <button data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/small/{{ $product->feasured_image}}" class="btn btn-primary add_to_cart"
+                                            type="button">Add to cart
+                                    </button>
+                                </li>
                                 <li class="add-cart-button btn-group">
 
-                                    <button data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/thumb/{{ $product->feasured_image}}" class="btn btn-primary add_to_cart icon"
+                                    <button data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/small/{{ $product->feasured_image}}" class="btn btn-primary buy-now-cart icon"
                                             data-toggle="dropdown"
                                             type="button">
                                         <i class="fa fa-shopping-cart"></i>
                                     </button>
-                                    <button  data-toggle="dropdown"
-                                             type="button" class="btn btn-primary cart-btn" ><i class="fa fa-shopping-cart"></i>Add to cart</button>
+
                                 </li>
-                                <li></li>
                                 <li class="lnk wishlist">
                                     <a class="add-to-wishlist" data-product_id="{{ $product->product_id}}" href="javascript:void(0)" title="Wishlist">
                                         <i class="icon fa fa-heart"></i>
                                     </a>
                                 </li>
-                                <li class="lnk">
-                                    <a class="buy-now-cart"
 
-                                       data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/thumb/{{ $product->feasured_image}}"
-
-                                       href="javascript:void(0)" title="Compare">
-                                        <i class="fa fa-signal" aria-hidden="true"></i>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
-
                     </div>
 
 

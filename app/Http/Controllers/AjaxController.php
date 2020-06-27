@@ -60,6 +60,32 @@ class AjaxController extends Controller
 
     }
 
+    public function hotdealProduct(Request $request){
+
+
+        $products =DB::table('product')->orderBy('modified_time','DESC')->get();
+        $view = view('website.hotdeal_product',compact('products'))->render();
+        return response()->json(['html'=>$view]);
+
+    }
+
+    public function relatedProduct(Request $request){
+
+        $product_id =$request->product_id;
+
+        $related_category= DB::table('product_category_relation')->select('category_id')->where('product_id',$request->product_id)->get();
+        if ($related_category) {
+            foreach ($related_category as $pcat) {
+                $related_category_id[] = $pcat->category_id;
+            }
+            $related_category = $related_category_id;
+        }
+        $products =DB::table('product')->join('product_category_relation','product_category_relation.product_id','=','product.product_id')->whereIn('category_id',$related_category)->orderBy('modified_time','DESC')->paginate(50);
+         $view = view('website.related_product',compact('products'))->render();
+        return response()->json(['html'=>$view]);
+
+    }
+
     public  function index()
     {
 

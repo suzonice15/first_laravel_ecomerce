@@ -63,79 +63,15 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-5 top-search-holder">
                     <div class="search-area" id="search">
-                        <form>
+                        <form action="{{ url('search') }}?search=" method="get">
                             <div class="control-group">
 
-                                <input class="search-field" placeholder="Search here..."/>
-                                <a class="search-button" href="#"></a>
+                                <input  type="text" class="search-field" name="search" id="searc_query" placeholder="Enter Product Name Or Product Code here..."/>
+                                <button type="submit" class="search-button" ></button>
                             </div>
                            </form>
-                        <ul class="dropdown-menu" style="display: none; top: 52px; left: 14px;width: 459px;">
-                            <li class="search-item"><a
-                                    href="https://www.startech.com.bd/acer-aspire-3-a315-53-n17c4-celeron-dual-core-laptop">
-                                    <div class="image"><img
-                                            src="https://www.startech.com.bd/image/cache/catalog/laptop/acer/a315-53-n17c4/a315-53-n17c4-1-80x80.jpg">
-                                    </div>
-                                    <div class="name">Acer Aspire 3 A315-53 N17C4 Celeron Dual Core 15.6" HD
-                                        Laptop
-                                    </div>
-                                    <div class="price">24,500৳</div>
-                                </a></li>
-                            <li class="search-item"><a
-                                    href="https://www.startech.com.bd/acer-aspire-a315-21-46zb-laptop">
-                                    <div class="image"><img
-                                            src="https://www.startech.com.bd/image/cache/catalog/laptop-notebook/acer/acer-aspire-a315-21-46zb-laptop/acer-aspire-a315-21-46zb-laptop-80x80.jpg">
-                                    </div>
-                                    <div class="name">Acer Aspire A315-21 46ZB AMD-A4-9120E 15.6" HD Laptop</div>
-                                    <div class="price">24,800৳</div>
-                                </a></li>
-                            <li class="search-item"><a
-                                    href="https://www.startech.com.bd/acer-aspire-a315-31-cdc-laptop">
-                                    <div class="image"><img
-                                            src="https://www.startech.com.bd/image/cache/catalog/laptop-notebook/acer/CDC/315-31-cdc-80x80.png">
-                                    </div>
-                                    <div class="name">Acer Aspire A315-31 C421 Intel Celeron Dual Core 15.6" HD
-                                        Laptop
-                                    </div>
-                                    <div class="price">24,000৳</div>
-                                </a></li>
-                            <li class="search-item"><a href="https://www.startech.com.bd/asus-asuspro-p1440-laptop">
-                                    <div class="image"><img
-                                            src="https://www.startech.com.bd/image/cache/catalog/laptop/asus/pro-p1440/pro-p1440-80x80.jpg">
-                                    </div>
-                                    <div class="name">Asus AsusPro P1440 8th Gen Core i3 8145U 14.0" HD Laptop</div>
-                                    <div class="price">43,500৳</div>
-                                </a></li>
-                            <li class="search-item"><a
-                                    href="https://www.startech.com.bd/asus-laptop-power-charger-adapter">
-                                    <div class="image"><img
-                                            src="https://www.startech.com.bd/image/cache/catalog/Accssories Laptop/Adapter/Asus Adapter-2-80x80.jpg">
-                                    </div>
-                                    <div class="name">Asus Laptop Power Charger Adapter</div>
-                                    <div class="price">1,700৳</div>
-                                </a></li>
-                            <li class="search-item"><a href="https://www.startech.com.bd/avita-admiror-laptop">
-                                    <div class="image"><img
-                                            src="https://www.startech.com.bd/image/cache/catalog/laptop/avita/admiror/admiror-80x80.jpg">
-                                    </div>
-                                    <div class="name">Avita Admiror Core i7 8th Gen 14" Full HD Laptop with Windows
-                                        10
-                                    </div>
-                                    <div class="price">105,500৳</div>
-                                </a></li>
-                            <li class="search-item"><a
-                                    href="https://www.startech.com.bd/avita-liber-ns13a2-i5-champagne-gold-laptop">
-                                    <div class="image"><img
-                                            src="https://www.startech.com.bd/image/cache/catalog/laptop/avita/avita-liber/ns13a2-champagne-gold/ns13a2-champagne-gold-1-80x80.jpg">
-                                    </div>
-                                    <div class="name">AVITA LIBER NS13A2 Core i5 8th Gen 13.3" Full HD Champagne
-                                        Gold Color Laptop with Windows 10
-                                    </div>
-                                    <div class="price">69,000৳</div>
-                                </a></li>
-                            <li class="search-item remainder-count"><a
-                                    href="https://www.startech.com.bd/product/search?search=laptop">709 more
-                                    results</a></li>
+                        <ul class="dropdown-menu" style="display: block; top: 52px; left: 14px;width: 459px;">
+
                         </ul>
 
                     </div>
@@ -201,10 +137,10 @@
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
-                                <li hidden="" class="active dropdown yamm-fw">
-                                    <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle"
-                                       data-toggle="dropdown">Home</a>
-                                </li>
+                                {{--<li hidden  class="active dropdown yamm-fw">--}}
+                                    {{--<a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle"--}}
+                                       {{--data-toggle="dropdown">Home</a>--}}
+                                {{--</li>--}}
 
                                 <?php
 
@@ -277,9 +213,9 @@
                                 }
                                 }
                                 ?>
-                                <li class="dropdown  navbar-right special-menu">
-                                    <a href="#">Todays offer</a>
-                                </li>
+                                {{--<li hidden class="dropdown  navbar-right special-menu">--}}
+                                    {{--<a href="#">Todays offer</a>--}}
+                                {{--</li>--}}
 
 
                             </ul>

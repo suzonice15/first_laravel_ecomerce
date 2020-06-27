@@ -2702,18 +2702,18 @@ age-container #owl-main .owl-next {
   font-size: 14px;
 }
 .product .cart {
-  margin-top: 5px;
-  opacity: 0;
-  -webkit-transition: all 0.5s linear 0s;
-  -moz-transition: all 0.5s linear 0s;
-  -o-transition: all 0.5s linear 0s;
-  transition: all 0.5s linear 0s;
-  width: 100%;
-  z-index: 666;
-  left: 50%;
-  position:absolute;
-   top:0;
-    margin-left:-55px
+    margin-top: 5px;
+    opacity: 0;
+    -webkit-transition: all 0.5s linear 0s;
+    -moz-transition: all 0.5s linear 0s;
+    -o-transition: all 0.5s linear 0s;
+    transition: all 0.5s linear 0s;
+    width: 117%;
+    z-index: 666;
+    left: 0%;
+    position: absolute;
+    top: 0;
+    margin-left: -9px;
  
 }
 .product .cart .action ul li {
@@ -3787,10 +3787,8 @@ age-container #owl-main .owl-next {
   color: #666666;
 }
 .single-product .product-info .price-container {
-  border-bottom: 1px solid #F2F2F2;
-  border-top: 1px solid #F2F2F2;
+
   margin-bottom: 0;
-  padding: 20px 0;
 }
 .single-product .product-info .price-container .price-box .price {
   font-size: 30px;
@@ -3806,7 +3804,6 @@ age-container #owl-main .owl-next {
 }
 .single-product .product-info .quantity-container {
   margin-bottom: 0;
-  padding: 20px 0;
 }
 .single-product .product-info .quantity-container .label {
   font-size: 14px;

@@ -153,6 +153,7 @@ class ComposerStaticInit8560e9bd6ab581be6af5ce7d8e3482a8
         ),
         'B' => 
         array (
+            'Buglinjo\\LaravelWebp\\' => 21,
             'Brick\\Math\\' => 11,
         ),
         'A' => 
@@ -429,6 +430,10 @@ class ComposerStaticInit8560e9bd6ab581be6af5ce7d8e3482a8
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
+        'Buglinjo\\LaravelWebp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/buglinjo/laravel-webp/src',
+        ),
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
@@ -468,6 +473,7 @@ class ComposerStaticInit8560e9bd6ab581be6af5ce7d8e3482a8
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/AjaxController.php',
+        'App\\Http\\Controllers\\CheckOutController' => __DIR__ . '/../..' . '/app/Http/Controllers/CheckOutController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/AdminController.php',
@@ -479,6 +485,7 @@ class ComposerStaticInit8560e9bd6ab581be6af5ce7d8e3482a8
         'App\\Http\\Controllers\\admin\\MediaController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/MediaController.php',
         'App\\Http\\Controllers\\admin\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/OrderController.php',
         'App\\Http\\Controllers\\admin\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/ProductController.php',
+        'App\\Http\\Controllers\\admin\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/SettingController.php',
         'App\\Http\\Controllers\\admin\\SliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/SliderController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -511,6 +518,13 @@ class ComposerStaticInit8560e9bd6ab581be6af5ce7d8e3482a8
         'Brick\\Math\\Internal\\Calculator\\GmpCalculator' => __DIR__ . '/..' . '/brick/math/src/Internal/Calculator/GmpCalculator.php',
         'Brick\\Math\\Internal\\Calculator\\NativeCalculator' => __DIR__ . '/..' . '/brick/math/src/Internal/Calculator/NativeCalculator.php',
         'Brick\\Math\\RoundingMode' => __DIR__ . '/..' . '/brick/math/src/RoundingMode.php',
+        'Buglinjo\\LaravelWebp\\Cwebp' => __DIR__ . '/..' . '/buglinjo/laravel-webp/src/Cwebp.php',
+        'Buglinjo\\LaravelWebp\\CwebpShellExecutionFailed' => __DIR__ . '/..' . '/buglinjo/laravel-webp/src/Cwebp.php',
+        'Buglinjo\\LaravelWebp\\Facades\\Webp' => __DIR__ . '/..' . '/buglinjo/laravel-webp/src/Facades/Webp.php',
+        'Buglinjo\\LaravelWebp\\Interfaces\\WebpInterface' => __DIR__ . '/..' . '/buglinjo/laravel-webp/src/Interfaces/WebpInterface.php',
+        'Buglinjo\\LaravelWebp\\Traits\\WebpTrait' => __DIR__ . '/..' . '/buglinjo/laravel-webp/src/Traits/WebpTrait.php',
+        'Buglinjo\\LaravelWebp\\Webp' => __DIR__ . '/..' . '/buglinjo/laravel-webp/src/Webp.php',
+        'Buglinjo\\LaravelWebp\\WebpServiceProvider' => __DIR__ . '/..' . '/buglinjo/laravel-webp/src/WebpServiceProvider.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
         'Carbon\\CarbonInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterface.php',

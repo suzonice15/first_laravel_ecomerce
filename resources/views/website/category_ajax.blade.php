@@ -33,14 +33,17 @@
 
                         <div class="product-price">
                                 <span class="price">
-                              {{$sell_price}} 				</span>
+
+
+                                  @money($sell_price)
+                                </span>
                             <?php
                             if($product->discount_price){
 
 
                             ?>
                             <span class="price-before-discount"
-                                  style="color:red">$ {{$product->product_price}}</span>
+                                  style="color:red">  @money($product->product_price) </span>
 
                             <?php
 
@@ -52,30 +55,32 @@
                     <div class="cart clearfix animate-effect">
                         <div class="action">
                             <ul class="list-unstyled">
+
+                                <li class="add-cart-button">
+                                    <button data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/small/{{ $product->feasured_image}}" class="btn btn-primary add_to_cart"
+                                            type="button">Add to cart
+                                    </button>
+                                </li>
                                 <li class="add-cart-button btn-group">
-                                    <button data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/thumb/{{ $product->feasured_image}}" class="btn btn-primary add_to_cart icon"
+
+                                    <button data-product_id="{{ $product->product_id}}" data-picture="{{ url('/public/uploads') }}/{{ $product->folder }}/small/{{ $product->feasured_image}}" class="btn btn-primary buy-now-cart icon"
                                             data-toggle="dropdown"
                                             type="button">
                                         <i class="fa fa-shopping-cart"></i>
                                     </button>
-                                    <button class="btn btn-primary  cart-btn"
-                                            type="button">Add to cart
-                                    </button>
+
                                 </li>
                                 <li class="lnk wishlist">
                                     <a class="add-to-wishlist" data-product_id="{{ $product->product_id}}" href="javascript:void(0)" title="Wishlist">
                                         <i class="icon fa fa-heart"></i>
                                     </a>
                                 </li>
-                                <li class="lnk">
-                                    <a class="add-to-cart" href="detail.html"
-                                       title="Compare">
-                                        <i class="fa fa-signal"></i>
-                                    </a>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>

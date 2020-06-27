@@ -42,10 +42,9 @@
 <script>
     $(document).ready(function(){
 
-
         function fetch_data(page, query)
         {
-            $.ajax({
+          $.ajax({
                 type:"GET",
                 url:"{{url('products/pagination')}}?page="+page+"&query="+query,
                 success:function(data)
