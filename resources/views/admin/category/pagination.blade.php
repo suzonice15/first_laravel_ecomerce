@@ -22,7 +22,7 @@
     @endforeach
 
     <tr>
-        <td colspan="3" align="center">
+        <td colspan="6" align="center">
             {!! $categories->links() !!}
         </td>
     </tr>

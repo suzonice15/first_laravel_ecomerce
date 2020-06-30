@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-   Update User Registration Form
+   Update Slider
 @endsection
 @section('mainContent')
     <style>
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="form-group featured-image">
-                            <label>Slider Picture</label>
+                            <label>Slider Picture(870*370)</label>
                             <input type="file" class="form-control" name="slider_picture">
 
                         </div>

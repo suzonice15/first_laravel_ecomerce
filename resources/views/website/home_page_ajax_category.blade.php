@@ -1,14 +1,20 @@
 <?php
+ $home_cat_section = explode(",", get_option('home_cat_section'));
+Arr::forget($home_cat_section,'0');
+
+
 $categories=DB::table('category')->select('category_id','category_title','category_name')->where('parent_id',0)->get();
-if($categories){
-foreach ($categories as  $category) {
-    $category_id=$category->category_id;
+if($home_cat_section){
+foreach ($home_cat_section as  $category) {
+  //  $category_id=$category->category_id;
+$category_info = get_category_info($category);
+
 
 $products= DB::table('product')->select('product.product_id','product_title','product_name','discount_price','product_price','folder','feasured_image','sku')->join('product_category_relation','product.product_id','=','product_category_relation.product_id')
-       ->where('product_category_relation.category_id',$category_id)->paginate(15);
+       ->where('product_category_relation.category_id',$category)->paginate(10);
 ?>
-<section class="section featured-product wow fadeInUp">
-    <h3 class="section-title"><a href="{{ url('/') }}/category/{{ $category->category_name }}">{{ $category->category_title }}</a></h3>
+<section class="section featured-product wow ">
+    <h3 class="section-title"><a href="{{ url('/') }}/category/{{ $category_info->category_name}}">{{ $category_info->category_title }}</a></h3>
     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 
         <?php
@@ -38,23 +44,19 @@ $products= DB::table('product')->select('product.product_id','product_title','pr
 
                     </div>
                     <div class="product-info text-left">
-                        <h3 class="name"><a
-                                href="{{ url('product') }}/{{$product->product_name}}">{{$product->product_title}}</a>
-                        </h3>
-
-                        <h3 class="name">Product Code : {{$product->sku}}</h3>
-
-
                         <div class="product-price">
                                 <span class="price">
-                              @money($sell_price)  				</span>
+
+
+                                  @money($sell_price)
+                                </span>
                             <?php
                             if($product->discount_price){
 
 
                             ?>
                             <span class="price-before-discount"
-                                  style="color:red">   @money($product->product_price)</span>
+                                  style="color:red">  @money($product->product_price) </span>
 
                             <?php
 
@@ -62,6 +64,13 @@ $products= DB::table('product')->select('product.product_id','product_title','pr
                             }
                             ?>
                         </div>
+                        <p  style="margin: -3px 1px;" >Product Code:{{$product->sku}}</p>
+                        <h3 style="margin-top: 2px;margin-bottom: -2px;"   class="name">
+                            <a href="{{ url('product') }}/{{$product->product_name}}">
+
+                                {{ $product->product_title }}
+                            </a>
+                        </h3>
                     </div>
                     <div class="cart clearfix animate-effect">
                         <div class="action">

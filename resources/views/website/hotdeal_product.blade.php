@@ -16,9 +16,9 @@
             <div class="hot-deal-wrapper">
                 <div class="image">
                     <img
-                        src="{{ url('/public/uploads') }}/{{ $product->folder }}/thumb/{{ $product->feasured_image }}"
+                        src="{{ url('/public/uploads') }}/{{ $product->folder }}/{{ $product->feasured_image }}"
                         alt="">                                            </div>
-                <div class="sale-offer-tag"><span>35%<br>off</span></div>
+                <div class="sale-offer-tag"><span>{{$product->discount}}%<br>off</span></div>
                 <div class="timing-wrapper">
 
                 </div>

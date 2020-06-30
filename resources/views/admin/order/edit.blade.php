@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-    Update Category Registration Form
+   Order Update Page
 @endsection
 @section('mainContent')
     <style>
@@ -246,11 +246,11 @@
 
 
                                $html = null;
-                               if (is_array($order_items['items'])) {
+                               if(is_array($order_items['items'])) {
                                foreach ($order_items['items'] as $product_id => $item) {
                                $featured_image = isset($item['featured_image']) ? $item['featured_image'] : null;
 
-                               $_product_title =  substr($item['name'], 0, 150);
+                             //  $_product_title =  substr($item['name'], 0, 150);
 
                                $product_ids[] = $product_id;
                                $product_code=0;
@@ -263,12 +263,17 @@
                                $subtotal_price += $totall;
                                //  $subtotal_price= $subtotal_price+ $item['subtotal'] ;
                              //  $item_count = $item_count + $item['qty'];
-                                   ?>
+
+                               $product=single_product_information($product_id);
+                               $sku=$product->sku;
+                               $name=$product->product_name;
+
+                               ?>
 
 
                                                                               <tr>
-                              													<td><a  target="_blank" href=""><?php echo $_product_title ?></a></td>
-                              														<td>{{  $product_code }}</td>
+                              													<td><a  target="_blank" href="{{url('product')}}/{{$name}}"><?php $name=(isset($item['name']) ? $item['name'] : null);echo $name; ?></a></td>
+                              														<td>{{  $sku }}</td>
                               														<td class="image text-center">
                               														<img src="<?php echo $featured_image ?>" height="30" width="30">
                               													</td>
@@ -278,10 +283,10 @@
                               														<td class="text-center">৳ <?php $price=(isset($item['price']) ? $item['price'] : null);echo $price; ?></td>
                               														<td class="text-right">৳ <?php $pricee=(isset($item['subtotal']) ? $item['subtotal'] : null);echo $pricee; ?> </td>
                               													</tr>
-          <input type="hidden"  name="products[items][<?=$product_id?>][featured_image]"    value="<?=$featured_image?>"/>
-          <input type="hidden"   name="products[items][<?=$product_id?>][price]"    value="<?=$item['price']?>"/>
-          <input type="hidden"   name="products[items][<?=$product_id?>][name]"    value=" <?php $name=(isset($item['name']) ? $item['name'] : null);echo $name; ?>"/>
-          <input type="hidden"   name="products[items][<?=$product_id?>][subtotal]"    value="<?=$item['subtotal']?>"/>
+          <input type="text"  name="products[items][<?=$product_id?>][featured_image]"    value="<?=$featured_image?>"/>
+          <input type="text"   name="products[items][<?=$product_id?>][price]"    value="<?=$item['price']?>"/>
+          <input type="text"   name="products[items][<?=$product_id?>][name]"    value="<?php $name=(isset($item['name']) ? $item['name'] : null);echo $name; ?>"/>
+          <input type="text"   name="products[items][<?=$product_id?>][subtotal]"    value="<?=$item['subtotal']?>"/>
 
 
 

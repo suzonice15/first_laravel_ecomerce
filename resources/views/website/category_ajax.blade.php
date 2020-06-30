@@ -9,7 +9,7 @@
         }
         ?>
 
-        <div class="col-xs-6 col-sm-6 col-md-2 wow fadeInUp">
+        <div class="col-xs-6 col-sm-6 col-md-2 wow ">
             <div class="products">
                 <div class="product">
                     <div class="product-image">
@@ -24,13 +24,6 @@
 
                     </div>
                     <div class="product-info text-left">
-                        <h3 class="name"><a
-                                href="{{ url('product') }}/{{$product->product_name}}">{{$product->product_title}}</a>
-                        </h3>
-                        <div style="display: none" class="rating rateit-small"></div>
-                        <br>
-                        <span >product code:{{$product->sku}}</span>
-
                         <div class="product-price">
                                 <span class="price">
 
@@ -51,6 +44,15 @@
                             }
                             ?>
                         </div>
+                        <p  style="margin: -3px 1px;" >Product Code:{{$product->sku}}</p>
+                        <h3 style="margin-top: 2px;margin-bottom: -2px;"   class="name">
+                            <a href="{{ url('product') }}/{{$product->product_name}}">
+
+                                {{ $product->product_title }}
+                            </a>
+                        </h3>
+
+
                     </div>
                     <div class="cart clearfix animate-effect">
                         <div class="action">

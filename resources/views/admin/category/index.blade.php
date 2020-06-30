@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-    All Categoreis Users List
+    All Categoreis  List
 @endsection
 @section('mainContent')
 <div class="box-body">

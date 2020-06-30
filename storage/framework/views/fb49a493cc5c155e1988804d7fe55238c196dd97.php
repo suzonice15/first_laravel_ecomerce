@@ -16,12 +16,12 @@
     ?>
 
     <div class="breadcrumb">
-        <div class="container">
+        <div class="container-fluid">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Clothing</a></li>
-                    <li class='active'>Floral Print Buttoned</li>
+                    <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                    <li><a href="<?php echo e(url('/category/')); ?>/<?php echo e($category_name); ?>" ><?php echo e($category_title); ?></a></li>
+                    <li class='active'><?php echo e($product->product_title); ?></li>
                 </ul>
             </div>
             <!-- /.breadcrumb-inner -->
@@ -30,10 +30,10 @@
     </div>
     <!-- /.breadcrumb -->
     <div class="body-content outer-top-xs">
-        <div class='container'>
+        <div class='container-fluid'>
             <div class='row single-product'>
                 <div class='col-md-3 sidebar'>
-                    <div class="sidebar-module-container">
+                    <div class="sidebar-module-container" style="margin-top:-30px">
 
 
                         <div class="sidebar-widget hot-deals wow fadeInUp outer-top-vs">
@@ -47,12 +47,13 @@
                 <!-- /.sidebar -->
                 <div class='col-md-9'>
                     <div class="detail-block">
-                        <div class="row  wow fadeInUp">
+                        <div class="row  wow ">
                             <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
                                 <div class="product-item-holder size-big single-product-gallery small-gallery">
                                     <div id="owl-single-productg">
                                         <div class="single-product-gallery-item">
                                                 <img class="img-responsive" id="thum_image_hover" alt="" src="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->feasured_image); ?>" />
+                                                <img style="left: 338px;position: absolute;right: -386px;z-index: 9;max-width: 1187px;height: 502px;top: -1px;" class="img-responsive" id="thum_image_hover_zoom" style="display: none" alt="" src="" />
 
                                         </div>
 
@@ -60,13 +61,70 @@
                                     <!-- /.single-product-slider -->
                                     <div class="single-product-gallery-thumbs gallery-thumbs">
                                         <div id="owl-single-product-thumbnails">
+                                            <?php
+                                            if($product->galary_image_1){
+                                            ?>
+
                                             <div class="item">
                                                      <img class="img-responsive thum_image_hover " width="85" alt="" data-echo="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->feasured_image); ?>"/>
 
                                             </div>
+<?php } ?>
+                                            <?php
+                                            if($product->galary_image_1){
+                                            ?>
+
                                             <div class="item">
-                                                     <img class="img-responsive thum_image_hover " width="85" alt=""  data-echo="<?php echo e(asset('assets/font_end/')); ?>/images/products/p18.jpg"/>
-                                             </div>
+                                                <img class="img-responsive thum_image_hover " width="85" alt="" data-echo="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->galary_image_1); ?>"/>
+
+                                            </div>
+                                            <?php } ?>
+                                            <?php
+                                            if($product->galary_image_2){
+                                            ?>
+
+                                            <div class="item">
+                                                <img class="img-responsive thum_image_hover " width="85" alt="" data-echo="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->galary_image_2); ?>"/>
+
+                                            </div>
+                                            <?php } ?>
+                                            <?php
+                                            if($product->galary_image_3){
+                                            ?>
+
+                                            <div class="item">
+                                                <img class="img-responsive thum_image_hover " width="85" alt="" data-echo="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->galary_image_3); ?>"/>
+
+                                            </div>
+                                            <?php } ?>
+                                            <?php
+                                            if($product->galary_image_4){
+                                            ?>
+
+                                            <div class="item">
+                                                <img class="img-responsive thum_image_hover " width="85" alt="" data-echo="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->galary_image_4); ?>"/>
+
+                                            </div>
+                                            <?php } ?>
+                                            <?php
+                                            if($product->galary_image_5){
+                                            ?>
+
+                                            <div class="item">
+                                                <img class="img-responsive thum_image_hover " width="85" alt="" data-echo="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->galary_image_5); ?>"/>
+
+                                            </div>
+                                            <?php } ?>
+                                            <?php
+                                            if($product->galary_image_6){
+                                            ?>
+
+                                            <div class="item">
+                                                <img class="img-responsive thum_image_hover " width="85" alt="" data-echo="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->galary_image_6); ?>"/>
+
+                                            </div>
+                                            <?php } ?>
+
 
                                         </div>
                                         <!-- /#owl-single-product-thumbnails -->
@@ -74,30 +132,34 @@
                                     <!-- /.gallery-thumbs -->
                                 </div>
                                 <!-- /.single-product-gallery -->
+
+
                             </div>
                             <!-- /.gallery-holder -->
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
                                     <h3 class="name"><?php echo e($product->product_title); ?></h3>
-                                    <div class="rating-reviews m-t-20">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <div class="rating rateit-small"></div>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <div class="reviews">
-                                                    <a href="#" class="lnk">(13 Reviews)</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.row -->
-                                    </div>
+                                    <p class="btn btn-success">Product Code: <?php echo e($product->sku); ?></p>
+                                    
+                                        
+                                            
+                                                
+                                            
+                                            
+                                                
+                                                    
+                                                
+                                            
+                                        
+                                        
+                                    
                                     <!-- /.rating-reviews -->
-                                    <div class="stock-container info-container m-t-2">
+                                    <div class="stock-container info-container m-t-2" style="margin-top: 0px;font-size: 3px;margin-bottom: -5px;">
+                                        <br>
                                         <div class="row">
                                             <div class="col-sm-2">
                                                 <div class="stock-box">
-                                                    <span class="label">Availability :</span>
+                                                    <span style="font-size: 14px;font-weight: bold;" class="label">Availability :</span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-9">
@@ -169,13 +231,15 @@
                                                             <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                             <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" value="2">
+                                                        <input type="text" id="quantity_of_sell" value="1">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-8">
-                                                <a href="#" class="btn btn-primary">  ADD TO CART</a>
-                                                <a href="#" class="btn btn-success"> BUY NOW  </a>
+                                                <a data-product_id="<?php echo e($product->product_id); ?>" data-picture="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/small/<?php echo e($product->feasured_image); ?>" class="btn btn-primary add_to_cart"
+                                                    href="javascript:void(0)" >  ADD TO CART</a>
+                                                <a href="javascript:void(0)" data-product_id="<?php echo e($product->product_id); ?>" data-picture="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/small/<?php echo e($product->feasured_image); ?>" class="btn btn-success buy-now-cart icon"
+                                                   > BUY NOW  </a>
                                                 <button data-product_id="<?php echo e($product->product_id); ?>"  class="btn btn-success add-to-wishlist icon"
                                                         data-toggle="dropdown"
                                                         type="button">
@@ -192,24 +256,24 @@
                                                 <h4 style="font-weight:bold;color:red"><i class="fa fa-address-book"> </i> ফোনে অর্ডারের জন্য ডায়াল করুন</h4>
                                                 <div class="col-sm-6 col-xs-12" style="padding:0">
                                                     <h4 style="font-size:25px;margin: 15px 0 15px 0;text-align:center;color:red;font-weight:900;text-align: left">
-                                                        <i class="fa fa-phone-square" style="padding-left:20px;color: green;">   </i> 01760 442 442 <br>
-                                                        <i class="fa fa-phone-square" style="padding-left:20px;color: green;"> </i> 01841 305 335 <br>
-                                                        <i class="fa fa-phone-square" style="padding-left:20px;color: green;"> </i>  01405 955 855<br>
+
+
+                                                        <?=get_option('phone_order')?>
                                                     </h4>
                                                 </div>
 
                                                 <div class="col-sm-12 col-md-12  col-xs-12" style="padding: 0">
-                                                    <img style="width: 60px;padding: 10px" class="img-responsive pull-left mobile-icon" src="http://www.egbazar.com//front_asset/d.png" alt="Call azibto" title="Call azibto"><h3 class="font-size-title-mobile" style="font-weight: bold;font-size: 18px;text-align:left">   ঢাকায় ডেলিভারি খরচ: ৳ 50.00</h3>
+                                                    <img style="width: 60px;padding: 10px" class="img-responsive pull-left mobile-icon" src="http://www.egbazar.com//front_asset/d.png" alt="Call azibto" title="Call azibto"><h3 class="font-size-title-mobile" style="font-weight: bold;font-size: 18px;text-align:left">   ঢাকায় ডেলিভারি খরচ: ৳ <?=get_option('shipping_charge_in_dhaka')?></h3>
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 col-xs-12" style="padding:0">
                                                     <img style="width: 60px;padding: 10px" class="img-responsive pull-left  mobile-icon" src="http://www.egbazar.com//front_asset/od.png" alt="Call azibto" title="Call azibto"><h3 class="font-size-title-mobile" style="font-weight: bold;font-size: 18px;text-align:left">
-                                                        ঢাকার বাইরের ডেলিভারি খরচ: ৳ 100.00
+                                                        ঢাকার বাইরের ডেলিভারি খরচ: ৳<?=get_option('shipping_charge_out_of_dhaka')?>
                                                     </h3>
                                                 </div>
 
                                                 <div class="col-sm-12 col-md-12 col-xs-12" style="padding:0">
                                                     <img style="width: 60px;padding: 10px" class="img-responsive pull-left  mobile-icon" src="http://www.egbazar.com//front_asset/bk.png" alt="Call azibto" title="Azibto  "><h3 class="font-size-title-mobile" style="font-weight: bold;font-size: 18px;text-align:left">
-                                                        বিকাশ মার্চেন্ট নাম্বার: 01309-806797
+                                                        বিকাশ   নাম্বার: <?=get_option('bkash')?>
                                                     </h3>
                                                 </div>
                                             </div>
@@ -231,7 +295,7 @@
                             <div class="col-sm-4">
                                 <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                     <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
-                                    <li class="active"><a data-toggle="tab" href="#tearm">terms and condition</a></li>
+                                    <li ><a data-toggle="tab" href="#tearm">terms and condition</a></li>
                                     <li><a data-toggle="tab" href="#review">REVIEW</a></li>
 
                                 </ul>
@@ -245,9 +309,9 @@
 
                                         </div>
                                     </div>
-                                    <div id="tearm" class="tab-pane in ">
+                                    <div id="tearm" class="tab-pane">
                                         <div class="product-tab">
-                                            <?php echo e($product->product_description); ?>
+                                         <?php echo e(get_option('default_product_terms')); ?>
 
                                         </div>
                                     </div>
@@ -408,9 +472,19 @@
         $(".thum_image_hover").on("mouseover", function () {
           let  image=$(this).attr('src');
          $("#thum_image_hover").attr('src',image);
+        });
 
+        $("#thum_image_hover").on("mouseover", function () {
+            let  image=$(this).attr('src');
+            $("#thum_image_hover_zoom").show();
+            $("#thum_image_hover_zoom").attr('src',image);
+        });
+        $("#thum_image_hover").on("mouseout", function () {
+
+            $("#thum_image_hover_zoom").hide();
 
         });
+
     </script>
 
     <script>
@@ -461,7 +535,8 @@ console.log(data.html)
                     jQuery(".home-owl-carousel").owlCarousel({
                         items : 4,
                         navigation : true,
-                        itemsDesktopSmall :[979,2],
+                        itemsDesktopSmall :[576,2],
+
                         itemsDesktop : [1199,2],
                         slideSpeed : 300,
                         pagination: false,

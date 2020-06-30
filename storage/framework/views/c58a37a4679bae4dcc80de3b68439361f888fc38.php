@@ -32,25 +32,25 @@
             <div class="callout callout-success">
 
 
-                <p>
+                <h4>
                     <?php echo e(Session::get('success')); ?>
 
 
-                </p>
+                </h4>
             </div>
         <?php elseif(Session::has('error')): ?>
             <div class="callout callout-danger">
                 <h4>Error !</h4>
 
-                <p>
+                <h4>
                     <?php echo e(Session::get('error')); ?>
 
 
-                </p>
+                </h4>
             </div>
         <?php else: ?>
             <div class="callout callout-success">
-                <marquee> <h4>Welcome To Isolutionsbd Project Management Software</h4>
+                <marquee> <h4><?= get_option('site_title') ?></h4>
 
                 </marquee>
             </div>
@@ -60,7 +60,7 @@
 
       <!-- Default box -->
       <div class="box box-success">
-        <div class="box-header with-border">
+        <div class="box-header with-border" style="text-align: center;background-color: #079907;color: white;">
           <h3 class="box-title"> <?php echo $__env->yieldContent('pageTitle'); ?></h3>
         </div>
           <?php echo $__env->yieldContent('mainContent'); ?>

@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use DB;
 use File;
 use Image;
+
 use  Session;
 use Webp;
-
+use AdminHelper;
+use URL;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -17,10 +20,30 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+
+        //echo Admin::SayHello();
+
+
+
+    }
+
     public function index()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
+
         $data['main'] = 'Products';
-        $data['active'] = 'All users';
+        $data['active'] = 'All Products';
         $data['title'] = '  ';
         $products= DB::table('product')->orderBy('product_id', 'desc')->paginate(10);
       
@@ -46,8 +69,17 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $data['main'] = 'Products';
-        $data['active'] = 'All categories';
+        $data['active'] = 'Add New Product';
         $data['title'] = '  ';
         $data['categories']=DB::table('category')->where('parent_id',0)->orderBy('category_id','ASC')->get();
         return view('admin.product.create', $data);
@@ -60,7 +92,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function old_store(Request $request)
+    public function store(Request $request)
     {
        $media_path='uploads/'.$request->folder;
        $orginalpath=public_path().'/uploads/'.$request->folder;
@@ -91,6 +123,13 @@ class ProductController extends Controller
         $data['seo_title']=$request->seo_title;
         $data['seo_keywords']=$request->seo_keywords;
         $data['seo_content']=$request->seo_content;
+        if($request->discount_price){
+            $price=$request->product_price-$request->discount_price;
+            $discount=round(($price*100)/($request->product_price));
+            $data['discount']=$discount;
+        }
+
+
    $product_id=DB::table('product')->insertGetId($data);
 
 
@@ -111,11 +150,11 @@ class ProductController extends Controller
             $featured_image = $product_id.'.'.$featured_image_orgianal->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_image = Image::make($featured_image_orgianal->getRealPath());
-            $resize_image->resize(800, 800, function ($constraint) {
+            $resize_image->resize(500, 500, function ($constraint) {
 
            })->save($destinationPath . '/' . $featured_image);
 
-            $resize_image->resize(273, 273, function ($constraint) {
+            $resize_image->resize(200, 200, function ($constraint) {
 
             })->save($thumb . '/' . $featured_image);
 
@@ -140,7 +179,7 @@ class ProductController extends Controller
             $galary_image1 = $random_number1.'.'.$product_image1->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image1 = Image::make($product_image1->getRealPath());
-            $resize_galary_image1->resize(800, 800, function ($constraint) {
+            $resize_galary_image1->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image1);
             $image_row_data['galary_image_1']=$galary_image1;
@@ -158,7 +197,7 @@ class ProductController extends Controller
             $galary_image2 = $random_number2.'.'.$product_image2->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image2 = Image::make($product_image2->getRealPath());
-            $resize_galary_image2->resize(800, 800, function ($constraint) {
+            $resize_galary_image2->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image2);
             $image_row_data['galary_image_2']=$galary_image2;
@@ -176,7 +215,7 @@ class ProductController extends Controller
             $galary_image3 = $random_number3.'.'.$product_image3->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image3 = Image::make($product_image3->getRealPath());
-            $resize_galary_image3->resize(800, 800, function ($constraint) {
+            $resize_galary_image3->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image3);
             $image_row_data['galary_image_3']=$galary_image3;
@@ -194,7 +233,7 @@ class ProductController extends Controller
             $galary_image4 = $random_number4.'.'.$product_image4->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image4 = Image::make($product_image4->getRealPath());
-            $resize_galary_image4->resize(800, 800, function ($constraint) {
+            $resize_galary_image4->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image4);
             $image_row_data['galary_image_4']=$galary_image4;
@@ -212,7 +251,7 @@ class ProductController extends Controller
             $galary_image5 = $random_number5.'.'.$product_image5->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image5 = Image::make($product_image5->getRealPath());
-            $resize_galary_image5->resize(800, 800, function ($constraint) {
+            $resize_galary_image5->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image5);
             $image_row_data['galary_image_5']=$galary_image5;
@@ -230,7 +269,7 @@ class ProductController extends Controller
             $galary_image6 = $random_number6.'.'.$product_image6->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image6 = Image::make($product_image6->getRealPath());
-            $resize_galary_image6->resize(800, 800, function ($constraint) {
+            $resize_galary_image6->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image6);
             $image_row_data['galary_image_6']=$galary_image6;
@@ -263,7 +302,7 @@ class ProductController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function bad_store(Request $request)
     {
         $media_path='uploads/'.$request->folder;
         $orginalpath=public_path().'/uploads/'.$request->folder;
@@ -286,7 +325,7 @@ class ProductController extends Controller
         $data['product_terms']=$request->product_terms;
         $data['sku']=$request->sku;
         $data['product_stock']=$request->product_stock;
-        $data['stock_alert']=$request->stock_alert;
+//        $data['stock_alert']=$request->stock_alert;
         $data['product_video']=$request->product_video;
         $data['status']=$request->status;
         $data['created_time']=date('Y-m-d H:i:s');
@@ -294,7 +333,7 @@ class ProductController extends Controller
         $data['seo_title']=$request->seo_title;
         $data['seo_keywords']=$request->seo_keywords;
         $data['seo_content']=$request->seo_content;
-        $product_id=0;//DB::table('product')->insertGetId($data);
+        $product_id=DB::table('product')->insertGetId($data);
 
 
         $featured_image_orgianal = $request->file('featured_image');
@@ -309,26 +348,26 @@ class ProductController extends Controller
 
 
         if($featured_image_orgianal) {
+            $destinationPath = $orginalpath;
 
             // $image_name = time().'.'.$featured_image->getClientOriginalExtension();
             $featured_image = $product_id.'.'.$featured_image_orgianal->getClientOriginalName();
-            $resize_image = Webp::make($featured_image_orgianal);
-            if ($resize_image->save(public_path('output.webp'))) {
-                // File is saved successfully
-            }
-            $destinationPath = $orginalpath;
+            $resize_image = Webp::make($request->file('featured_image'));
+            $resize_image->save($destinationPath . '/' . $featured_image);
+
           //  $resize_image = Image::make($featured_image_orgianal->getRealPath());
-            $resize_image->resize(800, 800, function ($constraint) {
+            $resize_image->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $featured_image);
 
-            $resize_image->resize(273, 273, function ($constraint) {
+            $resize_image->resize(200, 200, function ($constraint) {
 
             })->save($thumb . '/' . $featured_image);
 
             $resize_image->resize(50, 50, function ($constraint) {
 
             })->save($small . '/' . $featured_image);
+
             $image_row_data['feasured_image']=$featured_image;
             $media_data['media_title']=$request->product_title;
             $media_data['product_id']=$product_id;
@@ -347,7 +386,7 @@ exit();
             $galary_image1 = $random_number1.'.'.$product_image1->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image1 = Image::make($product_image1->getRealPath());
-            $resize_galary_image1->resize(800, 800, function ($constraint) {
+            $resize_galary_image1->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image1);
             $image_row_data['galary_image_1']=$galary_image1;
@@ -365,7 +404,7 @@ exit();
             $galary_image2 = $random_number2.'.'.$product_image2->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image2 = Image::make($product_image2->getRealPath());
-            $resize_galary_image2->resize(800, 800, function ($constraint) {
+            $resize_galary_image2->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image2);
             $image_row_data['galary_image_2']=$galary_image2;
@@ -383,7 +422,7 @@ exit();
             $galary_image3 = $random_number3.'.'.$product_image3->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image3 = Image::make($product_image3->getRealPath());
-            $resize_galary_image3->resize(800, 800, function ($constraint) {
+            $resize_galary_image3->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image3);
             $image_row_data['galary_image_3']=$galary_image3;
@@ -401,7 +440,7 @@ exit();
             $galary_image4 = $random_number4.'.'.$product_image4->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image4 = Image::make($product_image4->getRealPath());
-            $resize_galary_image4->resize(800, 800, function ($constraint) {
+            $resize_galary_image4->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image4);
             $image_row_data['galary_image_4']=$galary_image4;
@@ -419,7 +458,7 @@ exit();
             $galary_image5 = $random_number5.'.'.$product_image5->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image5 = Image::make($product_image5->getRealPath());
-            $resize_galary_image5->resize(800, 800, function ($constraint) {
+            $resize_galary_image5->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image5);
             $image_row_data['galary_image_5']=$galary_image5;
@@ -437,7 +476,7 @@ exit();
             $galary_image6 = $random_number6.'.'.$product_image6->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image6 = Image::make($product_image6->getRealPath());
-            $resize_galary_image6->resize(800, 800, function ($constraint) {
+            $resize_galary_image6->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image6);
             $image_row_data['galary_image_6']=$galary_image6;
@@ -494,7 +533,7 @@ exit();
 
         $data['product']=DB::table('product')->where('product_id',$id)->first();
         $data['main'] = 'Products';
-        $data['active'] = 'Update user';
+        $data['active'] = 'Update Products';
         $data['title'] = 'Update User Registration Form';
         $data['categories']=DB::table('category')->where('parent_id',0)->orderBy('category_id','ASC')->get();
         $data['product_categories']=DB::table('product_category_relation')->where('product_id',$id)->orderBy('product_id','ASC')->get();
@@ -529,7 +568,7 @@ exit();
         $data['product_terms']=$request->product_terms;
         $data['sku']=$request->sku;
         $data['product_stock']=$request->product_stock;
-        $data['stock_alert']=$request->stock_alert;
+//        $data['stock_alert']=$request->stock_alert;
         $data['product_video']=$request->product_video;
         $data['status']=$request->status;
         $data['created_time']=date('Y-m-d H:i:s');
@@ -537,7 +576,12 @@ exit();
         $data['seo_title']=$request->seo_title;
         $data['seo_keywords']=$request->seo_keywords;
         $data['seo_content']=$request->seo_content;
-       // $product_id=DB::table('product')->insertGetId($data);
+
+        if($request->discount_price){
+            $price=$request->product_price-$request->discount_price;
+            $discount=round(($price*100)/($request->product_price));
+            $data['discount']=$discount;
+        }
         DB::table('product')->where('product_id',$product_id)->update($data);
 
 
@@ -559,11 +603,11 @@ exit();
             $featured_image = $product_id.'.'.$featured_image_orgianal->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_image = Image::make($featured_image_orgianal->getRealPath());
-            $resize_image->resize(800, 800, function ($constraint) {
+            $resize_image->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $featured_image);
 
-            $resize_image->resize(273, 273, function ($constraint) {
+            $resize_image->resize(200, 200, function ($constraint) {
 
             })->save($thumb . '/' . $featured_image);
 
@@ -590,7 +634,7 @@ exit();
             $galary_image1 = $random_number1.'.'.$product_image1->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image1 = Image::make($product_image1->getRealPath());
-            $resize_galary_image1->resize(800, 800, function ($constraint) {
+            $resize_galary_image1->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image1);
             $data['galary_image_1']=$galary_image1;
@@ -610,7 +654,7 @@ exit();
             $galary_image2 = $random_number2.'.'.$product_image2->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image2 = Image::make($product_image2->getRealPath());
-            $resize_galary_image2->resize(800, 800, function ($constraint) {
+            $resize_galary_image2->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image2);
             $data['galary_image_2']=$galary_image2;
@@ -630,7 +674,7 @@ exit();
             $galary_image3 = $random_number3.'.'.$product_image3->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image3 = Image::make($product_image3->getRealPath());
-            $resize_galary_image3->resize(800, 800, function ($constraint) {
+            $resize_galary_image3->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image3);
             $data['galary_image_3']=$galary_image3;
@@ -649,7 +693,7 @@ exit();
             $galary_image4 = $random_number4.'.'.$product_image4->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image4 = Image::make($product_image4->getRealPath());
-            $resize_galary_image4->resize(800, 800, function ($constraint) {
+            $resize_galary_image4->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image4);
             $data['galary_image_4']=$galary_image4;
@@ -668,7 +712,7 @@ exit();
             $galary_image5 = $random_number5.'.'.$product_image5->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image5 = Image::make($product_image5->getRealPath());
-            $resize_galary_image5->resize(800, 800, function ($constraint) {
+            $resize_galary_image5->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image5);
             $data['galary_image_5']=$galary_image5;
@@ -687,7 +731,7 @@ exit();
             $galary_image6 = $random_number6.'.'.$product_image6->getClientOriginalName();
             $destinationPath = $orginalpath;
             $resize_galary_image6 = Image::make($product_image6->getRealPath());
-            $resize_galary_image6->resize(800, 800, function ($constraint) {
+            $resize_galary_image6->resize(500, 500, function ($constraint) {
 
             })->save($destinationPath . '/' . $galary_image6);
             $data['galary_image_6']=$galary_image6;

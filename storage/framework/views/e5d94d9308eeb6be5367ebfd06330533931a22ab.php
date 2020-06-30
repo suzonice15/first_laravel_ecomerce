@@ -1,5 +1,5 @@
 <?php $__env->startSection('pageTitle'); ?>
-    Category Registration Form
+    Add New Product
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('mainContent'); ?>
     <style>
@@ -103,7 +103,7 @@
                                     <input type="text" class="form-control" name="product_stock" id="product_stock"
                                            value="" autocomplete="off">
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group" hidden>
                                     <label for="stock_qty">Stock Alert.</label>
                                     <input type="text" class="form-control" name="stock_alert" id="stock_alert"
                                            value="" autocomplete="off">

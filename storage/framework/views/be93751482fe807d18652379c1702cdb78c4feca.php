@@ -16,9 +16,9 @@
             <div class="hot-deal-wrapper">
                 <div class="image">
                     <img
-                        src="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/thumb/<?php echo e($product->feasured_image); ?>"
+                        src="<?php echo e(url('/public/uploads')); ?>/<?php echo e($product->folder); ?>/<?php echo e($product->feasured_image); ?>"
                         alt="">                                            </div>
-                <div class="sale-offer-tag"><span>35%<br>off</span></div>
+                <div class="sale-offer-tag"><span><?php echo e($product->discount); ?>%<br>off</span></div>
                 <div class="timing-wrapper">
 
                 </div>

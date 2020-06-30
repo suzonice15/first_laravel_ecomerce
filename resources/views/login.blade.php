@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Log in</title>
+    <title><?=get_option('site_title')?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -32,7 +32,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ asset('assets/adminfile')}}/index2.html"><b>Admin</b>LTE</a>
+        <?=get_option('site_title')?>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -45,7 +45,10 @@
         <form action="{{ url('/login_check') }}" method="post">
             @csrf
             <div class="form-group has-feedback">
+
+
                 <input  required type="email" class="form-control" placeholder="Email" name="email">
+                <input   type="hidden" class="form-control" placeholder="Email" name="redirect" value="{{Session::get('redirect')}}">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">

@@ -1,14 +1,21 @@
 @extends('layouts.master')
 @section('pageTitle')
-    All Categoreis Users List
+    All Products   List
 @endsection
 @section('mainContent')
 <div class="box-body">
     <div class="row">
-        <div class="col-md-4  pull-right">
-            <input type="text" id="serach" name="search" placeholder="Search category" class="form-control" >
+        <div class="col-md-2">
+<a href="{{url('/admin/product/create')}}" class="form-control btn btn-success">
+    Add New Product
+
+</a>      </div>
+
+        <div class="col-md-5  pull-right">
+            <input type="text" id="serach" name="search" placeholder="Search Product By Product Code Or Product Name" class="form-control" >
         </div>
     </div>
+    <br/>
     <div class="table-responsive">
 
         <table  class="table table-bordered table-striped   ">

@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Image;
+use AdminHelper;
+use URL;
 
 class SliderController extends Controller
 {
@@ -15,9 +17,17 @@ class SliderController extends Controller
      */
     public function index()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
 
         $data['main'] = 'Sliders';
-        $data['active'] = 'All users';
+        $data['active'] = 'All Sliders';
         $data['title'] = '  ';
         $data['sliders']=DB::table('homeslider')->orderBy('modified_time','desc')->get();
         return view('admin.slider.index', $data);
@@ -32,8 +42,17 @@ class SliderController extends Controller
     public function create()
     {
 
-        $data['main'] = 'Users';
-        $data['active'] = 'Add user';
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
+        $data['main'] = 'Sliders';
+        $data['active'] = 'Add Slider';
         $data['title'] = 'User registration form';
         return view('admin.slider.create', $data);
     }
@@ -61,7 +80,7 @@ class SliderController extends Controller
 
             $resize_image = Image::make($image->getRealPath());
 
-            $resize_image->resize(1000, 300, function ($constraint) {
+            $resize_image->resize(870, 370, function ($constraint) {
 
             })->save($destinationPath . '/' . $image_name);
 
@@ -134,7 +153,7 @@ class SliderController extends Controller
 
             $resize_image = Image::make($image->getRealPath());
 
-            $resize_image->resize(1000, 500, function ($constraint) {
+            $resize_image->resize(870, 370, function ($constraint) {
 
             })->save($destinationPath . '/' . $image_name);
             $data['homeslider_picture']=$image_name;

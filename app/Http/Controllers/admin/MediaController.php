@@ -5,7 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use  Session;
 use Image;
+use AdminHelper;
+use URL;
+use Illuminate\Support\Facades\Redirect;
 
 class MediaController extends Controller
 {
@@ -16,6 +20,15 @@ class MediaController extends Controller
      */
     public function index()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $data['main'] = 'Media';
         $data['active'] = 'All Media';
         $data['title'] = '  ';
@@ -44,6 +57,15 @@ class MediaController extends Controller
      */
     public function create()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $data['main'] = 'Media';
         $data['active'] = 'All media';
         $data['title'] = '  ';
@@ -134,6 +156,15 @@ class MediaController extends Controller
      */
     public function destroy($id)
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $result=DB::table('media')->where('media_id',$id)->delete();
         if ($result) {
             return redirect('admin/media')

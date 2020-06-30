@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-    User Registration Form
+    Add New Slider
     @endsection
 @section('mainContent')
     <style>

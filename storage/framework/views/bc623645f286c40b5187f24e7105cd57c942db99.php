@@ -1,18 +1,16 @@
 <?php $__env->startSection('mainContent'); ?>
-
-
     <div class="breadcrumb">
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li class='active'>Handbags</li>
+                    <li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+                    <li class='active'><?php if(isset($products[0]->category_title)): ?> <?php echo e($products[0]->category_title); ?> <?php endif; ?> </li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="body-content outer-top-xs">
-        <div class='container'>
+        <div class='container-fluid'>
             <div class='row'>
 
                 <div class='col-md-12'>

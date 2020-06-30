@@ -34,6 +34,7 @@ class HomeController extends Controller
        // SELECT DISTINCT* FROM `product` join category on category.category_id=product_category_relation.category_id WHERE category.category_name='electronics-items' SELECT DISTINCT* FROM `product` join product_category_relation on product_category_relation.product_id=product.product_id join category on category.category_id=product_category_relation.category_id WHERE category.category_name='electronics-items'
        $data['products'] =DB::table('product')->join('product_category_relation','product_category_relation.product_id','=','product.product_id')->join('category','category.category_id','=','product_category_relation.category_id')->where('category_name',$category_name)->orderBy('modified_time','DESC')->paginate(18);
 
+
 $data['category_name']=$category_name;
         return view('website.category',$data);
      }
@@ -73,9 +74,11 @@ $data['category_name']=$category_name;
     {
        // $data['categories']=DB::table('category')->select('category_id','category_title','category_name')->where('parent_id',0)->get();
         $data['product']=DB::table('product')->select('*')->where('product_name',$product_name)->first();
+        $category_row =DB::table('product')->select('category_title','category_name')->join('product_category_relation','product_category_relation.product_id','=','product.product_id')->join('category','category.category_id','=','product_category_relation.category_id')->where('product_name',$product_name)->orderBy('category.category_id','DESC')->first();
 
 
-
+$data['category_name']=$category_row->category_name;
+$data['category_title']=$category_row->category_title;
         return view('website.product',$data);
      }
 

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-    Update Category Registration Form
+    Update Courier
 @endsection
 @section('mainContent')
     <style>
@@ -9,21 +9,7 @@
         }
     </style>
     <div class="box-body">
-        @if (count($errors) > 0)
-            <div class=" alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                <ul>
-
-                    @foreach ($errors->all() as $error)
-
-                        <li style="list-style: none">{{ $error }}</li>
-
-                    @endforeach
-
-                </ul>
-            </div>
-        @endif
+        
 
         <div class="col-sm-offset-0 col-md-12">
             <form  name="category" action="{{ url('admin/courier/update') }}/{{ $courier->courier_id }}" class="form-horizontal"

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-    All Admin Users List
+    All Sliders List
 @endsection
 @section('mainContent')
 

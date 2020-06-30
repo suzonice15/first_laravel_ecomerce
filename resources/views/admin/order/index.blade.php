@@ -1,12 +1,12 @@
 @extends('layouts.master')
 @section('pageTitle')
-    All Categoreis Users List
+    All Orders  List
 @endsection
 @section('mainContent')
 <div class="box-body">
     <div class="row">
-        <div class="col-md-4  pull-right">
-            <input type="text" id="serach" name="search" placeholder="Search Order Id,Customer Phone,Name" class="form-control" >
+        <div class="col-md-5  pull-right">
+            <input type="text" id="serach" name="search" placeholder="Search Order By Order Id,Customer Phone" class="form-control" >
             <br>
         </div>
     </div>
@@ -20,13 +20,14 @@
                 <th>Customer</th>
                 <th>Phone</th>
                 <th>City</th>
-                <th>address</th>
+                <th>Address</th>
                 <th>Created By</th>
                 <th>Amount</th>
                 <th>Delivery Charge</th>
                 <th>Status</th>
                <th>Order Date</th>
-               <th>Shipping Date</th>
+               {{--<th>Shipping Date</th>--}}
+               {{--<th>Order Modified</th>--}}
                 <th>Actions</th>
             </tr>
             </thead>

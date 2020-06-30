@@ -5,6 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use  Session;
+use Image;
+use AdminHelper;
+use URL;
+use Illuminate\Support\Facades\Redirect;
 
 class CourierController extends Controller
 {
@@ -15,7 +20,16 @@ class CourierController extends Controller
      */
     public function index()
     {
-        $data['main'] = 'Courier';
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
+        $data['main'] = 'Couriers';
         $data['active'] = 'All Courier';
         $data['title'] = '  ';
         // $data['users']=DB::table('category')->orderBy('cateo','desc')->get();
@@ -31,8 +45,17 @@ class CourierController extends Controller
      */
     public function create()
     {
-        $data['main'] = 'couriers';
-        $data['active'] = 'All couriers';
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
+        $data['main'] = 'Couriers';
+        $data['active'] = 'New Courier';
         $data['title'] = '  ';
 
         return view('admin.courier.create', $data);
@@ -81,8 +104,8 @@ class CourierController extends Controller
     public function edit($id)
     {
         $data['courier']=DB::table('courier')->where('courier_id',$id)->first();
-        $data['main'] = 'courier';
-        $data['active'] = 'Update courier';
+        $data['main'] = 'Couriers';
+        $data['active'] = 'Update Courier';
         $data['title'] = 'Update courier Registration Form';
 
         return view('admin.courier.edit', $data);
@@ -120,6 +143,15 @@ class CourierController extends Controller
      */
     public function delete($id)
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $result=DB::table('courier')->where('courier_id',$id)->delete();
         if ($result) {
             return redirect('admin/couriers')

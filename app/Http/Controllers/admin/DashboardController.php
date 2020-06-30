@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
+use  Session;
+use Illuminate\Support\Facades\Redirect;
 
+use AdminHelper;
 class DashboardController extends Controller
 {
     /**
@@ -11,8 +14,27 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+
+
+
+    }
+
     public function index()
     {
+
+    $user_id=AdminHelper::Admin_user_autherntication();
+
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->send();
+
+        }
+
+
         return view('layouts.master');
     }
 

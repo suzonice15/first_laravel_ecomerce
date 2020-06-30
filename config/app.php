@@ -176,7 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 	Intervention\Image\ImageServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
-        Buglinjo\LaravelWebp\WebpServiceProvider::class,
 
 
     ],
@@ -232,7 +231,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 		 'Image' => Intervention\Image\Facades\Image::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-        'Webp' => Buglinjo\LaravelWebp\Facades\Webp::class,
+
+            'AdminHelper' => App\Helpers\AdminHelper::class,
+
 
 
 

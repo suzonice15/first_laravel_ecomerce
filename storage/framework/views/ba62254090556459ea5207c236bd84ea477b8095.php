@@ -11,11 +11,10 @@
         <div class="col-md-12  col-lg-12 col-12 ">
 
 
-            <div class="card">
-                <div class="card-header">Order Review
+            <div class="panel panel-primary">
+                <div class="panel-heading"><b>Order Review</b>
                 </div>
-                <div class="card-body">
-
+                <div class="panel-body">
 
 					<span class="checkout-fields">
 
@@ -26,12 +25,12 @@
                                     <table class="table table-striped table-bordered" >
                                         <tbody>
                                         <tr>
-                                            <th width="5%" class="name">Sl</th>
-                                            <th   width="40%"  class="name">Products</th>
-                                            <th  width="10%" class="name">Code</th>
+                                            <th width="1%" class="name">Sl</th>
+                                            <th   width="30%"  class="name">Products</th>
+                                            <th  width="10%" class="name">Product Code</th>
                                             <th  width="20%" class="name">Quantity</th>
-                                            <th   width="10%" class="name">Price</th>
-                                            <th   width="10%" class="name">Total</th>
+                                            <th   width="15%" class="name">Price</th>
+                                            <th   width="15%" class="name">Total</th>
                                             <th   width="5%" class="total text-right">Remove </th>
                                         </tr>
 
@@ -47,9 +46,11 @@
                                         $imagee=$row->attributes['picture'];
                                         $product_id=$row->id;
 
-
+                                        $product=      single_product_information($product_id);
+                                        $sku=$product->sku;
+                                        $name=$product->product_name;
                                         ?>
-                                            <tr id="<?=$row->id?>">
+                                              <tr id="<?=$row->id?>">
                                                 <td>
 
 
@@ -58,10 +59,10 @@
                                                 <td>
                                                     <img src="<?=$imagee?>" width="30">
 
-                                                    <a href="" target="_blank"><?=$row->name?></a>
+                                                    <a href="<?php echo e(url('/product')); ?>/<?php echo e($name); ?>" target="_blank"><?=$row->name?></a>
                                                 </td>
                                                 <td>
-                                                   33
+                                                  <?=$sku?>
                                                 </td>
 
 
@@ -77,14 +78,16 @@
 
                                                 <td>
 													<span
-                                                        id="per_poduct_price"> <?= $row->price ?></span>
-                                                    টাকা
+                                                        id="per_poduct_price">  <?php echo '৳ ' . number_format($row->price, 2); ?></span>
+
                                                 </td>
                                                 <td>
 												<span id="per_poduct_total_price_<?= $row->id?>">
-												 <?=$subTotal_price?>
+
+												 <?php echo '৳ ' . number_format($subTotal_price, 2); ?>
+
 													</span>
-                                                    টাকা
+
 
 
                                                 </td>
@@ -92,12 +95,12 @@
                                                     <a href="javascript:void(0)"
                                                        onclick="CartDataRemove('<?= $row->id?>')"
                                                        style="color:red ;font-weight: bold;padding: 2px 5px;margin-left: 12px;">
-                                                        <i class="fa fa-remove" title="Remove"></i>
+                                                        <span class="glyphicon glyphicon-trash btn btn-danger"></span>
                                                     </a>
                                                 </td>
 
                                             </tr>
-                                        <?php } ?>
+                                          <?php } ?>
 
                                         </tbody>
                                     </table>
@@ -112,15 +115,15 @@
                                                 <span class="extra bold totalamout">Total</span>
                                             </td>
                                             <td class="text-right">
-													<span class="bold totalamout">৳ <span
-                                                            id="total_cost"><?= $total ?></span></span>
+													<span class="bold totalamout"> <span
+                                                            id="total_cost"> <?php echo '৳ ' . number_format($total, 2); ?></span></span>
 
 
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
-									  <a style="margin-left: 1px;" href="<?php echo e(url('/')); ?>/chechout"  class="btn btn-info">Checkout</a>
+									  <a style="margin-left: 1px;" href="<?php echo e(url('/')); ?>/checkout"  class="btn btn-info">Checkout</a>
 
 
                     <a  href="<?php echo e(url('/')); ?>"    style="background-color:#FF6061;border: none" class="btn btn-info" >continue shopping</a>

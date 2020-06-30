@@ -1,13 +1,20 @@
 <?php $__env->startSection('pageTitle'); ?>
-    All Categoreis Users List
+    All Products   List
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('mainContent'); ?>
 <div class="box-body">
     <div class="row">
-        <div class="col-md-4  pull-right">
-            <input type="text" id="serach" name="search" placeholder="Search category" class="form-control" >
+        <div class="col-md-2">
+<a href="<?php echo e(url('/admin/product/create')); ?>" class="form-control btn btn-success">
+    Add New Product
+
+</a>      </div>
+
+        <div class="col-md-5  pull-right">
+            <input type="text" id="serach" name="search" placeholder="Search Product By Product Code Or Product Name" class="form-control" >
         </div>
     </div>
+    <br/>
     <div class="table-responsive">
 
         <table  class="table table-bordered table-striped   ">
@@ -43,9 +50,7 @@
 
         function fetch_data(page, query)
         {
-            $(document).ajaxStart(function() { Pace.restart(); });
-
-            $.ajax({
+          $.ajax({
                 type:"GET",
                 url:"<?php echo e(url('products/pagination')); ?>?page="+page+"&query="+query,
                 success:function(data)

@@ -28,7 +28,7 @@
     @endforeach
 
     <tr>
-        <td colspan="3" align="center">
+        <td colspan="9" align="center">
             {!! $products->links() !!}
         </td>
     </tr>

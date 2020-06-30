@@ -52,19 +52,19 @@
 
                         }
                         ?>
-                        <br>
-                        Product Code:<?php echo e($product->sku); ?>
+
+                       <p  style="margin: -3px 1px;" >Product Code:<?php echo e($product->sku); ?></p>
+                        <h3 style="margin-top: 2px;margin-bottom: -2px;"   class="name">
+                            <a href="<?php echo e(url('product')); ?>/<?php echo e($product->product_name); ?>">
+
+                                <?php echo e($product->product_title); ?>
+
+                            </a>
+                        </h3>
+
 
                     </div>
 
-
-                    <p>
-                        <a href="<?php echo e(url('product')); ?>/<?php echo e($product->product_name); ?>">
-
-                            <?php echo e($product->product_title); ?>
-
-                        </a>
-                    </p>
 
 
                       <!-- /.product-price -->

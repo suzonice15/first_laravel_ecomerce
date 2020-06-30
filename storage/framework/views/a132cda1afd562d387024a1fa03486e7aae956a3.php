@@ -28,7 +28,7 @@
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
     <tr>
-        <td colspan="3" align="center">
+        <td colspan="9" align="center">
             <?php echo $products->links(); ?>
 
         </td>

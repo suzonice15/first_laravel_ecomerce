@@ -63,6 +63,16 @@ Route::get('/admin/category/delete/{id}', 'admin\CategoryController@delete');
 Route::get('category/pagination/fetch_data', 'admin\CategoryController@fetch_data');
 
 
+/****=============== home page setting section    =====================  ******/
+Route::get('admin/homepage/setting', 'admin\SettingController@homePageSetting');
+Route::post('admin/homepage/setting', 'admin\SettingController@homePageSetting');
+
+Route::get('admin/default/setting', 'admin\SettingController@defaultSetting');
+Route::post('admin/default/setting', 'admin\SettingController@defaultSetting');
+Route::get('admin/social/setting', 'admin\SettingController@socialSetting');
+Route::post('admin/social/setting', 'admin\SettingController@socialSetting');
+
+
 
 /****=============== product section    =====================  ******/
 Route::get('admin/products', 'admin\ProductController@index');

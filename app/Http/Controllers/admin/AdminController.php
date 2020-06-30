@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 use  Session;
 use Image;
-
-
+use Illuminate\Support\Facades\Redirect;
+use AdminHelper;
+use URL;
 
 class AdminController extends Controller
 {
@@ -16,39 +17,46 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function login()
     {
-		
-//
-//for($i=0;$i<150;$i++){
-//$id=public_path('uploads/');
-//if (!is_dir($id.$i)) {
-//mkdir($id . $i, 0777, TRUE);
-//
-//}
-//}
+        $user_id = AdminHelper::Admin_user_autherntication();
 
+        if ($user_id > 0) {
+            //  return redirect('admin');
+            Redirect::to('dashboard')->send();
+
+        }
 
         return view('login');
-    
-	}
+
+    }
+
     public function loginCheck(Request $request)
     {
-        $email= $request->email;
-        $password=md5($request->password);
+        $email = $request->email;
+        $redirect = $request->redirect;
+        $password = md5($request->password) . 'admin';
         $result = DB::table('admin')->where('email', $email)->where('password', $password)->first();
-        if($result){
-            $id =$result->admin_id;
-            $name =$result->name;
-            $status =$result->status;
+        if ($result) {
+            $id = $result->admin_id;
+            $name = $result->name;
+            $picture = $result->picture;
+            $status = $result->status;
             Session::put('id', $id);
             Session::put('status', $status);
+            Session::put('name', $name);
+            Session::put('picture', $picture);
 
-
-            return redirect('dashboard');
+            if ($redirect) {
+                return redirect($redirect);
+            } else {
+                return redirect('dashboard');
+            }
 
         } else {
-            return view('login',['error'=>'Your Email Or Password Invalid Try Again']);
+            return view('login', ['error' => 'Your Email Or Password Invalid Try Again']);
         }
 
     }
@@ -59,7 +67,7 @@ class AdminController extends Controller
         $data['main'] = 'Users';
         $data['active'] = 'All users';
         $data['title'] = '  ';
-        $data['users']=DB::table('admin')->orderBy('admin_id','desc')->get();
+        $data['users'] = DB::table('admin')->orderBy('admin_id', 'desc')->get();
         return view('admin.user.index', $data);
     }
 
@@ -69,7 +77,7 @@ class AdminController extends Controller
         $data['main'] = 'Users';
         $data['active'] = 'Add user';
         $data['title'] = 'User registration form';
-       return view('admin.user.create', $data);
+        return view('admin.user.create', $data);
     }
 
     /**
@@ -82,7 +90,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
 
@@ -90,43 +98,43 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
     }
+
     public function store(Request $request)
     {
 
-        $data['name']=$request->user_name;
-        $data['email']=$request->user_email;
-        $data['status']=$request->user_type;
-        $password=md5($request->user_pass);
-        $data['password']=$password.'admin';
-        $data['registered_date']=date('Y-m-d');
-        
+        $data['name'] = $request->user_name;
+        $data['email'] = $request->user_email;
+        $data['status'] = $request->user_type;
+        $password = md5($request->user_pass);
+        $data['password'] = $password . 'admin';
+        $data['registered_date'] = date('Y-m-d');
+
         $image = $request->file('user_picture');
-            if($image) {
+        if ($image) {
 
-                $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
 
-                $destinationPath = public_path('/uploads/users');
+            $destinationPath = public_path('/uploads/users');
 
-                $resize_image = Image::make($image->getRealPath());
+            $resize_image = Image::make($image->getRealPath());
 
-                $resize_image->resize(150, 150, function ($constraint) {
+            $resize_image->resize(200, 200, function ($constraint) {
 
-                })->save($destinationPath . '/' . $image_name);
-
-
-                $data['picture']=$image_name;
-            }
+            })->save($destinationPath . '/' . $image_name);
 
 
+            $data['picture'] = $image_name;
+        }
 
-        $result =DB::table('admin')->insert($data);
+
+        $result = DB::table('admin')->insert($data);
         if ($result) {
             return redirect('admin/users')
                 ->with('success', 'created successfully.');
@@ -141,12 +149,12 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-      $data['user']=DB::table('admin')->where('admin_id',$id)->first();
+        $data['user'] = DB::table('admin')->where('admin_id', $id)->first();
 
         $data['main'] = 'Users';
         $data['active'] = 'Update user';
@@ -157,29 +165,29 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
 
 
-        $data['name']=$request->name;
-        $data['email']=$request->email;
-        $data['status']=$request->status;
-        $old_picture= public_path('/uploads/users').'/'.$request->old_picture;
-        $password_id=$request->user_pass;
-        if($password_id) {
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['status'] = $request->status;
+        $old_picture = public_path('/uploads/users') . '/' . $request->old_picture;
+        $password_id = $request->user_pass;
+        if ($password_id) {
             $password = md5($request->user_pass);
             $data['password'] = $password . 'admin';
         }
         $image = $request->file('user_picture');
-        if($image) {
-if(file_exists($old_picture)){
+        if ($image) {
+            if (file_exists($old_picture)) {
 
-    unlink($old_picture);
-}
+                unlink($old_picture);
+            }
             $image_name = time() . '.' . $image->getClientOriginalExtension();
 
             $destinationPath = public_path('/uploads/users');
@@ -189,9 +197,9 @@ if(file_exists($old_picture)){
             $resize_image->resize(150, 150, function ($constraint) {
 
             })->save($destinationPath . '/' . $image_name);
-            $data['picture']=$image_name;
+            $data['picture'] = $image_name;
         }
-        $result= DB::table('admin')->where('admin_id',$id)->update($data);
+        $result = DB::table('admin')->where('admin_id', $id)->update($data);
         if ($result) {
             return redirect('admin/users')
                 ->with('success', 'Updated successfully.');
@@ -205,7 +213,7 @@ if(file_exists($old_picture)){
 
     public function delete($id)
     {
-        $result=DB::table('admin')->where('admin_id',$id)->delete();
+        $result = DB::table('admin')->where('admin_id', $id)->delete();
         if ($result) {
             return redirect('admin/users')
                 ->with('success', 'Deleted successfully.');
@@ -215,20 +223,25 @@ if(file_exists($old_picture)){
         }
 
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy()
     {
-        Session::put('id','');
-        return redirect('/')->with('success','You are successfully Logout !');
+        Session::put('id', '');
+        $url = URL::current();
+
+        return redirect('/')->with('success', 'You are successfully Logout !')->with('current', $url);
     }
+
     public function logout()
     {
-        Session::put('id','');
-        return redirect('/admin')->with('success','You are successfully Logout !');
+        Session::put('id', '');
+        $url = URL::current();
+        return redirect('/admin')->with('success', 'You are successfully Logout !')->with('current', $url);;
     }
 }

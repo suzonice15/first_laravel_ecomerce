@@ -5,15 +5,18 @@
             <td>{{ ++$i }}</td>
             <td>{{ $order->order_id }}</td>
             <td>{{ $order->customer_name }}</td>
-            <td><span class="label label-info">{{ $order->customer_phone }}<span class="label label-success"></td>
-            <td>{{ $order->order_area }}</td>
+            <td><span class="label label-info">{{ $order->customer_phone }}<span class="label label-success"></span></td>
+            <td><span class="label label-success">@if($order->order_area=='inside')
+                Inside Dhaka @else Outside Dhaka @endif
+                </span></td>
             <td>{{ $order->customer_address }}</td>
-            <td>sujon</td>
-            <td>{{ $order->order_total }}</td>
-            <td>{{ $order->shipping_charge }}</td>
+            <td>{{$order->created_by}}</td>
+            <td> @money($order->order_total)
+                </td>
+            <td> @money($order->shipping_charge)</td>
             <td><span class="label label-success">{{ $order->order_status }}</span></td>
-            <td>{{date('d-F-Y h:i:s a',strtotime($order->created_time))}}</td>
-            <td>{{date('d-F-Y h:i:s a',strtotime($order->shipment_time))}}</td>
+            <td>{{date('d-F-Y H:i:s a',strtotime($order->created_time))}}</td>
+
             <td>
                 <a title="edit" href="{{ url('admin/order') }}/{{ $order->order_id }}">
                     <span class="glyphicon glyphicon-edit btn btn-success"></span>
@@ -28,7 +31,7 @@
     @endforeach
 
     <tr>
-        <td colspan="3" align="center">
+        <td colspan="13" align="center">
             {!! $orders->links() !!}
         </td>
     </tr>

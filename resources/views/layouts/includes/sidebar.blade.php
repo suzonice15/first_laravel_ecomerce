@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('assets/adminfile')}}/dist/img/user2-160x160.jpg" class="img-circle"
+                <img src="{{url('public/uploads/users')}}/{{ Session::get('picture') }}" class="img-circle"
                      alt="User Image">
             </div>
             <div class="pull-left info">
@@ -17,7 +17,7 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-                <a href="{{ url('/') }}">
+                <a href="{{ url('/dashboard') }}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
 
@@ -151,27 +151,17 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href=" {{ url('admin/media/create') }}"><i class="fa fa-circle-o"></i>Home page setting</a></li>
-                    <li><a href=" {{ url('admin/media') }}"><i class="fa fa-circle-o"></i>Default setting</a>
+                    <li><a href=" {{ url('admin/default/setting') }}"><i class="fa fa-circle-o"></i>Default Setting</a>
                     </li>
+                    <li><a href=" {{ url('admin/homepage/setting') }}"><i class="fa fa-circle-o"></i>Home Page Setting</a></li>
+                    <li><a href=" {{ url('admin/social/setting') }}"><i class="fa fa-circle-o"></i>Social Media Setting</a></li>
+
 
                 </ul>
             </li>
 
 
-
-            <li>
-                <a href="../calendar.html">
-                    <i class="fa fa-calendar"></i> <span>Calendar</span>
-                    <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-                </a>
-            </li>
-
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-        </ul>
+    </ul>
     </section>
     <!-- /.sidebar -->
 </aside>

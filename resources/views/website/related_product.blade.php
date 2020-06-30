@@ -52,17 +52,18 @@
 
                         }
                         ?>
-                        <br>
-                        Product Code:{{$product->sku}}
+
+                       <p  style="margin: -3px 1px;" >Product Code:{{$product->sku}}</p>
+                        <h3 style="margin-top: 2px;margin-bottom: -2px;"   class="name">
+                            <a href="{{ url('product') }}/{{$product->product_name}}">
+
+                                {{ $product->product_title }}
+                            </a>
+                        </h3>
+
+
                     </div>
 
-
-                    <p>
-                        <a href="{{ url('product') }}/{{$product->product_name}}">
-
-                            {{ $product->product_title }}
-                        </a>
-                    </p>
 
 
                       <!-- /.product-price -->

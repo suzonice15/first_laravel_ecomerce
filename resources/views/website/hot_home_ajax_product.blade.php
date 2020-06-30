@@ -34,17 +34,18 @@
                                         <div class="col2 col-xs-7">
                                             <div class="product-info">
                                                 <h3 class="name"><a href="{{ url('product') }}/{{$product->product_name}}">{{ $product->product_title }}</a></h3>
-                                                <div class="rating rateit-small"></div>
+                                               <br/>
+                                                <p>Product Code:  {{$product->sku}}</p>
                                                 <div class="product-price">
                                 <span class="price">
-                              {{$sell_price}} 				</span>
+                              @money($sell_price) 				</span>
                                                     <?php
                                                     if($product->discount_price){
 
 
                                                     ?>
                                                     <span class="price-before-discount"
-                                                          style="color:red">$ {{$product->product_price}}</span>
+                                                          style="color:red">  @money($product->product_price)</span>
 
                                                     <?php
 

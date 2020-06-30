@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use DB;
 use  Session;
 use Image;
-
+use AdminHelper;
+use URL;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -16,15 +18,31 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+
+
+    }
+
     public function index()
     {
-        $data['main'] = 'Users';
-        $data['active'] = 'All users';
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+              Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
+        $data['main'] = 'Categories';
+        $data['active'] = 'All Categories';
         $data['title'] = '  ';
        // $data['users']=DB::table('category')->orderBy('cateo','desc')->get();
       //  return view('admin.user.index', $data);
-        $categories= DB::table('category')->orderBy('category_id', 'desc')->paginate(10);
-        return view('admin.category.index', compact('categories'));
+        $data['categories']= DB::table('category')->orderBy('category_id', 'desc')->paginate(10);
+        return view('admin.category.index',$data);
     }
 
     public  function  fetch_data(Request $request){
@@ -47,8 +65,17 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $data['main'] = 'Categories';
-        $data['active'] = 'All categories';
+        $data['active'] = 'All Categories';
         $data['title'] = '  ';
         $data['categories']=DB::table('category')->orderBy('category_title','ASC')->get();
         return view('admin.category.create', $data);
@@ -104,6 +131,15 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $data['category']=DB::table('category')->where('category_id',$id)->first();     
         $data['main'] = 'Users';
         $data['active'] = 'Update user';
@@ -153,6 +189,15 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $result=DB::table('category')->where('category_id',$id)->delete();
         if ($result) {
             return redirect('admin/categories')

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-    Category Registration Form
+    Add New Category
 @endsection
 @section('mainContent')
     <style>

@@ -23,11 +23,11 @@ class CheckOutController extends Controller
         return view('website.checkout',$data);
     }
     public  function checkoutStore(Request $request){
-        $data['order_status'] ='new';
+         $data['order_status'] ='new';
         $data['shipping_charge'] = $request->shipping_charge;
-        $data['created_time'] = date("Y-m-d H:i:s");
+        $data['created_time'] = date("Y-m-d h:i:s");
         $data['created_by'] = 'Customer';
-    //    $data['modified_time'] = date("Y-m-d H:i:s");
+     //$data['modified_time'] = date("Y-m-d h:i:s");
         $data['order_date'] = date("Y-m-d");
         $data['order_total'] =$request->order_total;
         $data['products'] = serialize($request->products);
@@ -38,18 +38,12 @@ class CheckOutController extends Controller
         $data['staff_id'] = 0;
 
          $data['payment_type'] = $request->payment_type;
-    //    $data['city'] = $request->city;
-
-
-
-
-
-
-
-        // $customer_name = $data['customer_name'];
+     $data['order_area'] = $request->order_area;
+        //// $customer_name = $data['customer_name'];
         // $customer_email = $data['customer_email'];
         // $site_title = get_option('site_title');
         // $site_email = get_option('email');
+
 
 
 

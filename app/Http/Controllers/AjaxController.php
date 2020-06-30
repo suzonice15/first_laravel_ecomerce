@@ -17,6 +17,7 @@ class AjaxController extends Controller
     {
 
        $product_id=$request->product_id;
+       $quntity=$request->quntity;
         $product=DB::table('product')->where('product_id',$product_id)->first();
        // $image=$product->
 
@@ -33,7 +34,7 @@ class AjaxController extends Controller
             'id' => $product_id, // inique row ID
             'name' => $product_title,
             'price' => $price,
-            'quantity' => 1,
+            'quantity' => $quntity,
             'attributes' => array('picture'=>$picture)
         ));
         $items = \Cart::getContent();
@@ -63,7 +64,7 @@ class AjaxController extends Controller
     public function hotdealProduct(Request $request){
 
 
-        $products =DB::table('product')->orderBy('modified_time','DESC')->get();
+        $products =DB::table('product')->orderBy('discount','DESC')->paginate(30);
         $view = view('website.hotdeal_product',compact('products'))->render();
         return response()->json(['html'=>$view]);
 

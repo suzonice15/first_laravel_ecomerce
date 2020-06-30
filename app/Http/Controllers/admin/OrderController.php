@@ -1,11 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
-
+use  Session;
+use Image;
+use AdminHelper;
+use URL;
+use Illuminate\Support\Facades\Redirect;
 class OrderController extends Controller
 {
     /**
@@ -15,6 +18,15 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $data['main'] = 'Orders';
         $data['active'] = 'All Orders';
         $data['title'] = '  ';
@@ -27,9 +39,8 @@ class OrderController extends Controller
 
             $query = $request->get('query');
             $query = str_replace(" ", "%", $query);
-            $orders = DB::table('order_data')->orWhere('order_id','LIKE','%'.$query.'%')
-                ->orWhere('customer_phone','LIKE','%'.$query.'%')
-                ->orWhere('customer_name','LIKE','%'.$query.'%')->orderBy('order_id', 'desc')
+            $orders = DB::table('order_data')->where('order_id','LIKE','%'.$query.'%')
+                ->orWhere('customer_phone','LIKE','%'.$query.'%')->orderBy('order_id', 'desc')
                 ->paginate(10);
             return view('admin.order.pagination', compact('orders'));
         }
@@ -44,6 +55,15 @@ class OrderController extends Controller
      */
     public function create()
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
         $data['main'] = 'Orders';
         $data['active'] = 'All orders';
         $data['title'] = '  ';
@@ -140,6 +160,15 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+        $user_id=AdminHelper::Admin_user_autherntication();
+        $url=  URL::current();
+
+        if($user_id < 1){
+            //  return redirect('admin');
+            Redirect::to('admin')->with('redirect',$url)->send();
+
+        }
+
 
         $data['main'] = 'Orders';
         $data['active'] = 'Update Orders';

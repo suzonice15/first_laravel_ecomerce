@@ -34,17 +34,18 @@
                                         <div class="col2 col-xs-7">
                                             <div class="product-info">
                                                 <h3 class="name"><a href="<?php echo e(url('product')); ?>/<?php echo e($product->product_name); ?>"><?php echo e($product->product_title); ?></a></h3>
-                                                <div class="rating rateit-small"></div>
+                                               <br/>
+                                                <p>Product Code:  <?php echo e($product->sku); ?></p>
                                                 <div class="product-price">
                                 <span class="price">
-                              <?php echo e($sell_price); ?> 				</span>
+                              <?php echo '৳ ' . number_format($sell_price, 2); ?> 				</span>
                                                     <?php
                                                     if($product->discount_price){
 
 
                                                     ?>
                                                     <span class="price-before-discount"
-                                                          style="color:red">$ <?php echo e($product->product_price); ?></span>
+                                                          style="color:red">  <?php echo '৳ ' . number_format($product->product_price, 2); ?></span>
 
                                                     <?php
 

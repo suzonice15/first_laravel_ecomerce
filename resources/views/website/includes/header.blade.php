@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
-    <title>Flipmart premium HTML5 & CSS3 Template</title>
+    <title>Tazidbd</title>
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/font_end/')}}/css/bootstrap.min.css">
     <!-- Customizable CSS -->
@@ -35,7 +35,7 @@
 <!--  HEADER  -->
 <header class="header-style-1">
     <div class="top-bar animate-dropdown">
-        <div class="container">
+        <div class="container-fluid">
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
@@ -52,12 +52,12 @@
         </div>
     </div>
     <div class="main-header">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-2 logo-holder">
                     <div class="logo">
                         <a href="{{ url('/') }}">
-                            <img src="{{ asset('assets/font_end/')}}/images/logo.png" alt="">
+                            <img src="{{get_option('logo')}}" alt="">
                         </a>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-3 ">
 
-                    <h2 style="color: white;font-weight: bold;margin-top: 13px;">017383056700</h2>
+                    <h2 style="color: white;font-weight: bold;margin-top: 13px;"><img style="width: 50px;" src="{{url('/public/')}}/call.gif"><?=get_option('phone')?></h2>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
                     <!-- SHOPPING CART DROPDOWN -->
@@ -122,7 +122,7 @@
     </div>
     <!--  NAVBAR -->
     <div class="header-nav animate-dropdown">
-        <div class="container">
+        <div class="container-fluid">
             <div class="yamm navbar navbar-default" role="navigation">
                 <div class="navbar-header">
                     <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse"

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('pageTitle')
-    Update Category Registration Form
+    Update Product
 @endsection
 @section('mainContent')
     <style>
@@ -110,7 +110,7 @@
                                         <input type="text" class="form-control" name="product_stock" id="product_stock"
                                                value="{{ $product->product_stock }}" autocomplete="off">
                                     </div>
-                                    <div class="form-group ">
+                                    <div class="form-group" hidden>
                                         <label for="stock_qty">Stock Alert.</label>
                                         <input type="text" class="form-control" name="stock_alert" id="stock_alert"
                                                value="{{ $product->stock_alert }}" autocomplete="off">
@@ -328,7 +328,7 @@
                         </div>
                         <div class="box-body" style="padding: 22px; ">
                             <div class="form-group ">
-                            <textarea class="form-control" rows="3" name="product_summary"
+                            <textarea class="form-control" rows="3" name="product_summary ckeditor"
                                       id="product_summary"> {{ $product->product_summary }}</textarea>
                             </div>
                         </div>
@@ -340,7 +340,7 @@
                         </div>
                         <div class="box-body" style="padding: 22px; ">
                             <div class="form-group ">
-                <textarea id="editor1" class="form-control" rows="10" name="product_description"
+                <textarea id="editor1" class="form-control ckeditor" rows="10" name="product_description"
                           id="product_description">{{ $product->product_description }}</textarea>
                             </div>
                         </div>
@@ -354,7 +354,7 @@
                         </div>
                         <div class="box-body" style="padding: 22px; ">
                             <div class="form-group ">
-									<textarea class="form-control textarea " rows="5" name="product_terms"
+									<textarea class="form-control ckeditor " rows="5" name="product_terms"
                                               id="product_terms">{{ $product->product_terms }}</textarea>
                             </div>
                         </div>
